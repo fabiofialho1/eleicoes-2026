@@ -133,12 +133,13 @@ export function percentAxis(axisMax, step = 5) {
 }
 
 // ---- Regions (IBGE). Labels are looked up here; data only carries UF ids.
+// Each region has its own color (--region-N in site.css), the same in every chart, so rings can be compared.
 export const REGIONS = [
-  { id: "north", label: "Norte", ufs: ["AC", "AM", "AP", "PA", "RO", "RR", "TO"] },
-  { id: "northeast", label: "Nordeste", ufs: ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"] },
-  { id: "central-west", label: "Centro-Oeste", ufs: ["DF", "GO", "MS", "MT"] },
-  { id: "southeast", label: "Sudeste", ufs: ["ES", "MG", "RJ", "SP"] },
-  { id: "south", label: "Sul", ufs: ["PR", "RS", "SC"] },
+  { id: "north", label: "Norte", color: "--region-4", ufs: ["AC", "AM", "AP", "PA", "RO", "RR", "TO"] },
+  { id: "northeast", label: "Nordeste", color: "--region-2", ufs: ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"] },
+  { id: "central-west", label: "Centro-Oeste", color: "--region-5", ufs: ["DF", "GO", "MS", "MT"] },
+  { id: "southeast", label: "Sudeste", color: "--region-1", ufs: ["ES", "MG", "RJ", "SP"] },
+  { id: "south", label: "Sul", color: "--region-3", ufs: ["PR", "RS", "SC"] },
 ];
 
 // ---- Colors computed in JS (CSS color-mix is ignored by older Android browsers, which leaves SVG shapes black).

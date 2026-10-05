@@ -11,6 +11,11 @@
   --series-2: #eb6834;
   --other: #c9c8c0;
   --row-hover: #eceae3;
+  --region-1: #4a3aa7;
+  --region-2: #1baf7a;
+  --region-3: #eda100;
+  --region-4: #e87ba4;
+  --region-5: #008300;
   --namew: 152px;
 }
 @media (prefers-color-scheme: dark) {
@@ -27,6 +32,11 @@
     --series-2: #d95926;
     --other: #4a4a46;
     --row-hover: #262624;
+    --region-1: #9085e9;
+    --region-2: #199e70;
+    --region-3: #c98500;
+    --region-4: #d55181;
+    --region-5: #008300;
   }
 }
 :root[data-theme="dark"] {
@@ -42,6 +52,11 @@
   --series-2: #d95926;
   --other: #4a4a46;
   --row-hover: #262624;
+  --region-1: #9085e9;
+  --region-2: #199e70;
+  --region-3: #c98500;
+  --region-4: #d55181;
+  --region-5: #008300;
 }
 @media (max-width: 480px) { :root { --namew: 140px; } .name { font-size: 12px; } }
 

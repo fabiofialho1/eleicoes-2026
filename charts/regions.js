@@ -1,4 +1,4 @@
-import { el, fmtInt, fmtPct, topCandidates, tableView, attachTip, tipLine, REGIONS, rampColor, rampRgb, luminance, watchTheme } from "./shared.js";
+import { el, fmtInt, fmtPct, topCandidates, tableView, attachTip, tipLine, REGIONS, token, luminance, watchTheme } from "./shared.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 const svgEl = (tag, attrs = {}) => {
@@ -14,9 +14,6 @@ function slicePath(a0, a1) {
   const big = a1 - a0 > Math.PI ? 1 : 0;
   return `M${x0} ${y0}A${R_OUT} ${R_OUT} 0 ${big} 1 ${x1} ${y1}L${x2} ${y2}A${R_IN} ${R_IN} 0 ${big} 0 ${x3} ${y3}Z`;
 }
-// The five regions get the same ramp positions in both rings (largest region = strongest tint), so a region
-// keeps its tint from one candidate to the other.
-const STEPS = [0.9, 0.72, 0.54, 0.38, 0.24];
 const million = (n) => (n / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + " mi";
 
 function render(root, data) {
@@ -26,7 +23,7 @@ function render(root, data) {
   const abroadShare = (c) => (c.byUf.ZZ.votes / c.total) * 100;
 
   root.append(el("p", "chart-lead",
-    "Cada anel soma o total do candidato (100%). As regiões seguem a mesma ordem e o mesmo tom nos dois anéis, da que tem mais votos válidos à que tem menos. Passe o mouse ou toque em uma fatia para ver os detalhes."));
+    "Cada anel soma o total do candidato (100%). Cada região tem a mesma cor nos dois anéis, para comparar o tamanho das fatias, e as regiões seguem a mesma ordem, da que tem mais votos válidos à que tem menos. Passe o mouse ou toque em uma fatia para ver os detalhes."));
 
   const grid = el("div", "donuts");
   const repaint = [];
@@ -64,7 +61,8 @@ function render(root, data) {
         label.textContent = fmtPct(r.share, 0);
         svg.append(label);
       }
-      return { path, label, step: STEPS[i] };
+      path.style.fill = `var(${r.color})`;
+      return { path, label, region: r };
     });
     const num = svgEl("text", { x: CX, y: CY - 2, class: "donut-num" }); num.textContent = fmtPct(cand.natPct, 2);
     const cap = svgEl("text", { x: CX, y: CY + 22, class: "donut-cap" }); cap.textContent = "dos votos válidos";
@@ -72,21 +70,19 @@ function render(root, data) {
     card.append(svg);
 
     const list = el("ul", "donut-legend");
-    const chips = rows.map((r) => {
+    rows.forEach((r) => {
       const li = el("li");
       const chip = el("i", "swatch");
+      chip.style.background = `var(${r.color})`;
       li.append(chip, el("span", "lg-name", r.label), el("b", "lg-pct", fmtPct(r.share)), el("span", "lg-votes", `${million(r.votes)} de votos`));
       list.append(li);
-      return chip;
     });
     card.append(list);
     card.append(el("p", "donut-note", `Exterior: ${fmtPct(abroadShare(cand))}, pequeno demais para aparecer no anel.`));
 
-    repaint.push(() => slices.forEach((s, i) => {
-      const color = rampColor(cand, s.step);
-      s.path.style.fill = color;
-      chips[i].style.background = color;
-      if (s.label) s.label.style.fill = luminance(rampRgb(cand, s.step)) > 0.6 ? "#0b0b0b" : "#ffffff";
+    // Slice colors come from CSS variables (they follow the theme); only the label color needs the resolved color.
+    repaint.push(() => slices.forEach((s) => {
+      if (s.label) s.label.style.fill = luminance(token(s.region.color)) > 0.6 ? "#0b0b0b" : "#ffffff";
     }));
     grid.append(card);
   });
