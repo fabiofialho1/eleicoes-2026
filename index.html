@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eleições 2026 Brasil</title>
 <!-- The code version lives here (shown in the footer); bump it on every change, in Europe/Berlin time. -->
-<meta name="app-version" content="Versão do código: 2026-10-05 16:05">
+<meta name="app-version" content="Versão do código: 2026-10-05 16:49">
 <script>
 // Always load the newest deploy. GitHub Pages lets browsers keep files for about 10 minutes, so on the published
 // site every visit is redirected once to the same address with a unique ?_cb= value, which skips any cached copy.
@@ -110,7 +110,7 @@ try {
   if (!res.ok) throw new Error(`data/states.json: ${res.status}`);
   data = await res.json();
   document.getElementById("status").textContent =
-    `Presidente, 1º turno · apuração de ${data.brazil.updatedAt} (${data.brazil.countedPct.toLocaleString("pt-BR")}% das seções).`;
+    `Presidente, 1º turno: ninguém passou de 50% dos votos válidos, vai para o 2º turno · apuração de ${data.brazil.updatedAt} (${data.brazil.countedPct.toLocaleString("pt-BR")}% das seções).`;
 } catch (e) {
   loadError = e.message;
   document.getElementById("status").textContent = "";
