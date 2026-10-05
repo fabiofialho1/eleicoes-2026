@@ -38,7 +38,7 @@ export function renderCover(root, data) {
   cv.append(kicker);
   cv.append(el("h2", "cv-h1", "Chega a divisão."));
   const sub = el("div", "cv-sub");
-  sub.append(el("b", null, "O país está dividido"), document.createTextNode(": estados pendem para lados diferentes."));
+  sub.append(document.createTextNode("Na eleição para presidente, ganha quem tem mais votos no "), el("b", null, "total do Brasil"), document.createTextNode(", não por estado."));
   cv.append(sub);
 
   // ---- map: each state split by AREA in proportion to the two candidates' votes
@@ -124,12 +124,10 @@ export function renderCover(root, data) {
   wrap.append(key);
   cv.append(wrap);
 
+  const sp = (c) => c.byUf.SP.natPct;
   const st = el("div", "cv-statement");
-  st.append(document.createTextNode("No fim, é a "), el("em", null, "soma"), document.createTextNode(" que importa."), document.createElement("br"), document.createTextNode("A diferença é pequena: qualquer estado conta."));
+  st.append(document.createTextNode("Exemplo: São Paulo, o estado mais populoso, soma "), el("em", null, `${num(sp(F))} pontos dos ${num(F.natPct)}%`), document.createTextNode(" de Flávio e "), el("em", "cv-l", `${num(sp(L))} dos ${num(L.natPct)}%`), document.createTextNode(" de Lula."));
   cv.append(st);
-  const round = el("div", "cv-round");
-  round.append(document.createTextNode("Ninguém passou de 50% dos votos válidos: a eleição vai para o "), el("b", null, "2º turno"), document.createTextNode("."));
-  cv.append(round);
 
   // ---- regions: one stacked bar per candidate. Bar length = the candidate's result in Brazil; each segment = percentage
   // points that one region adds to it (same axis for both bars, same color per region).
@@ -175,7 +173,6 @@ export function renderCover(root, data) {
   cv.append(el("div", "cv-rnote", `Pontos percentuais dos votos válidos do Brasil. O exterior (${num2(F.byUf.ZZ.natPct)} e ${num2(L.byUf.ZZ.natPct)}) soma ao total e não cabe na barra.`));
 
   const close = el("div", "cv-close");
-  close.append(el("p", null, "Antes de destilar preconceito com o Nordeste, vamos interpretar os dados direto."));
   close.append(el("small", null, `Fonte: TSE (resultados.tse.jus.br), apuração de ${data.brazil.updatedAt.slice(0, 10)}, ${fmtPct(data.brazil.countedPct, 2)} das seções. Votos válidos. Nordeste: AL, BA, CE, MA, PB, PE, PI, RN e SE.`));
   cv.append(close);
 
