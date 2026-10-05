@@ -14,7 +14,7 @@ function panel(cand, axisMax) {
   sw.style.setProperty("--c", cand.color);
   head.append(sw, el("h3", null, `${cand.name} (${cand.party})`));
   card.append(head, el("p", "panel-meta",
-    `${fmtPct(cand.natPct, 2)} dos votos válidos do Brasil (${fmtInt.format(cand.total)} votos) · só SP, MG e RJ somam ${fmtPct(rows[2].cumulative)} desse total`));
+    `${fmtPct(cand.natPct, 2)} dos votos válidos do Brasil · ${fmtInt.format(cand.total)} votos`));
 
   const plot = el("div", "plot");
   const list = el("div", "rows");
@@ -48,8 +48,7 @@ function render(root, data) {
   const axisMax = Math.ceil((maxShare + 2) / 2) * 2; // same scale in both charts, with room for the value label
 
   root.append(el("p", "chart-lead",
-    "Um gráfico para cada candidato, com os estados em ordem decrescente de votos. Cada barra é a parte do percentual nacional do candidato que vem do estado, " +
-    "medida sobre todos os votos válidos do país. Somando os estados, chega-se ao percentual que o candidato teve no Brasil. A escala é a mesma nos dois."));
+    "Cada barra mostra quanto do percentual nacional do candidato vem do estado. Somando os estados, chega-se ao resultado dele no Brasil. A escala é a mesma nos dois."));
   const pair = el("div", "pair");
   const built = cands.map((c) => panel(c, axisMax));
   built.forEach((b) => pair.append(b.card));
@@ -63,7 +62,7 @@ function render(root, data) {
 
 export default {
   id: "contribuicao-por-candidato",
-  title: "De onde vem o resultado de cada candidato: um gráfico por candidato",
-  description: "Presidente, 1º turno: os estados em ordem de votos, mostrando quanto cada um soma ao percentual nacional do candidato.",
+  title: "Um gráfico por candidato",
+  description: "Os estados em ordem de votos, com quanto cada um soma ao resultado nacional.",
   render,
 };

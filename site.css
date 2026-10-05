@@ -68,7 +68,10 @@ a { color: var(--text-secondary); }
 .home-card h2 { margin: 0; font-size: 18px; line-height: 1.25; font-weight: 650; text-wrap: balance; }
 .home-card p { margin: 0; font-size: 14px; color: var(--text-secondary); }
 .home-go { margin-top: auto; font-size: 13px; font-weight: 600; color: var(--text-secondary); }
-.back { align-self: flex-start; font-size: 14px; text-decoration: none; padding: 4px 0; }
+.back {
+  position: sticky; top: 0; z-index: 5; align-self: stretch; font-size: 14px; font-weight: 600; text-decoration: none;
+  padding: 10px 0; background: var(--page); border-bottom: 1px solid var(--grid);
+}
 .back:hover, .back:focus-visible { text-decoration: underline; }
 .chart > h2:focus { outline: none; }
 

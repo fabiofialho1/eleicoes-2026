@@ -18,10 +18,9 @@ function render(root, data) {
 
   const top = states[0];
   root.append(el("p", "chart-lead",
-    `${a.short} teve ${fmtPct(a.natPct, 2)} dos votos válidos do Brasil e ${b.short} teve ${fmtPct(b.natPct, 2)}. ` +
-    `Cada barra mostra quanto desse percentual vem de um estado: por exemplo, os votos de ${a.short} em ${ufName(top.uf)} equivalem a ${fmtPct(top.cells[0].share)} ` +
-    `de todos os votos válidos do país. Somando todos os estados, as barras de cada candidato fecham o percentual nacional dele. ` +
-    `Estados ordenados pelos votos de ${a.short}.`));
+    `${a.short} teve ${fmtPct(a.natPct, 2)} dos votos válidos do Brasil; ${b.short}, ${fmtPct(b.natPct, 2)}. ` +
+    `Cada barra mostra quanto desse percentual vem de um estado (${ufName(top.uf)}, por exemplo, soma ${fmtPct(top.cells[0].share)} para ${a.short}). ` +
+    `Somando todos os estados, chega-se ao total do candidato.`));
   root.append(legend(cands.map((c) => ({ color: c.color, label: `${c.name} (${c.party}) · ${fmtPct(c.natPct, 2)} dos votos válidos` }))));
 
   const card = el("div", "card");
@@ -63,7 +62,7 @@ function render(root, data) {
 
 export default {
   id: "contribuicao",
-  title: "De onde vem o resultado de cada candidato: comparação",
-  description: "Presidente, 1º turno: quanto do percentual nacional de votos válidos de cada um dos dois candidatos mais votados vem de cada estado.",
+  title: "Comparação entre os candidatos",
+  description: "Quanto cada estado soma ao resultado nacional dos dois mais votados, lado a lado.",
   render,
 };
