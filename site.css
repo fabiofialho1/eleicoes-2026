@@ -154,6 +154,24 @@ a { color: var(--text-secondary); }
 .readout-val b { font-size: 15px; }
 .readout-note { margin: 2px 0 0; font-size: 13px; color: var(--text-secondary); }
 
+/* regions: one ring per candidate */
+.donuts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .donuts { grid-template-columns: 1fr; } }
+.donut-card { min-width: 0; }
+.donut-svg { display: block; width: 100%; max-width: 320px; height: auto; margin: 4px auto 0; }
+.donut-slice { stroke: var(--surface-1); stroke-width: 2.5; stroke-linejoin: round; outline: none; cursor: pointer; }
+.donut-slice:hover, .donut-slice:focus-visible { stroke: var(--text-primary); stroke-width: 3; }
+.donut-pct { font-size: 15px; font-weight: 700; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+.donut-num { font-size: 30px; font-weight: 700; text-anchor: middle; fill: var(--text-primary); }
+.donut-cap { font-size: 13px; text-anchor: middle; fill: var(--text-secondary); }
+.donut-legend { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.donut-legend li { display: grid; grid-template-columns: 14px 1fr auto auto; align-items: center; gap: 4px 10px; font-size: 14px; }
+.donut-legend .swatch { width: 14px; height: 14px; }
+.lg-name { color: var(--text-primary); }
+.lg-pct { font-variant-numeric: tabular-nums; }
+.lg-votes { color: var(--text-secondary); font-variant-numeric: tabular-nums; min-width: 96px; text-align: right; }
+.donut-note { margin: 10px 0 0; font-size: 12px; color: var(--text-muted); }
+
 /* table view */
 .tableview { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 12px; padding: 12px 16px; }
 .tableview summary { cursor: pointer; font-weight: 600; font-size: 14px; }

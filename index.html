@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eleições 2026 Brasil</title>
 <!-- The code version lives here (shown in the footer); bump it on every change, in Europe/Berlin time. -->
-<meta name="app-version" content="Versão do código: 2026-10-05 14:55">
+<meta name="app-version" content="Versão do código: 2026-10-05 15:23">
 <script>
 // Always load the newest deploy. GitHub Pages lets browsers keep files for about 10 minutes, so on the published
 // site every visit is redirected once to the same address with a unique ?_cb= value, which skips any cached copy.
@@ -23,7 +23,7 @@
   window.__CB = q;
   // Module files that can change between deploys. A file missing from this list still works,
   // it is only subject to the browser cache.
-  var modules = ["charts/registry.js", "charts/shared.js", "charts/brazil-map.js", "charts/map.js", "charts/contribution.js", "charts/contribution-by-candidate.js"];
+  var modules = ["charts/registry.js", "charts/shared.js", "charts/brazil-map.js", "charts/map.js", "charts/regions.js", "charts/contribution.js", "charts/contribution-by-candidate.js"];
   var imports = {};
   modules.forEach(function (f) { imports["./" + f] = "./" + f + q; });
   document.write('<link rel="stylesheet" href="site.css' + q + '">');
