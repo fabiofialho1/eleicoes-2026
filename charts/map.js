@@ -69,27 +69,31 @@ function render(root, data) {
 
   root.append(el("p", "chart-lead",
     "Cada estado é pintado pelo quanto soma ao percentual nacional de cada candidato (votos do candidato no estado ÷ todos os votos válidos do Brasil). " +
-    "Quanto mais intensa a cor, maior a contribuição, e a escala é a mesma em todos os mapas. Toque ou passe o mouse sobre um estado para ver os números."));
+    "Quanto mais intensa a cor, maior a contribuição, e a mesma cor vale o mesmo percentual em todos os mapas. Toque ou passe o mouse sobre um estado para ver os números."));
 
   const maps = el("div", "maps");
   const paths = []; // hit/outline path of every state in every map, to highlight the same state everywhere
 
   function gradientLegend(cand) {
+    // The bar covers the part of the shared scale this candidate actually reaches, ending at their maximum.
+    const topUf = ufs.reduce((x, y) => (cand.byUf[y].natPct > cand.byUf[x].natPct ? y : x));
+    const top = cand.byUf[topUf].natPct, endPos = position(top, max);
     const box = el("div", "gradient-legend");
     const bar = el("div", "gradient-bar");
     const ticks = el("div", "gradient-ticks");
-    [...TICKS.filter((t) => t < max - 3), max].forEach((v, i, all) => {
-      const t = el("span", null, fmtPct(v, v === max ? 1 : 0));
-      t.style.left = `${position(v, max) * 100}%`;
-      if (i === all.length - 1) t.style.transform = "translateX(-100%)";
+    const marks = [...TICKS.filter((t) => position(t, max) / endPos <= 0.8), top];
+    marks.forEach((v, i) => {
+      const t = el("span", null, fmtPct(v, v === top ? 1 : 0));
+      t.style.left = `${(position(v, max) / endPos) * 100}%`;
+      if (i === marks.length - 1) t.style.transform = "translateX(-100%)";
       else if (i > 0) t.style.transform = "translateX(-50%)";
       ticks.append(t);
     });
     recolor.push(() => {
-      const stops = Array.from({ length: 21 }, (_, i) => `${mixColor(cand, i / 20)} ${i * 5}%`).join(", ");
+      const stops = Array.from({ length: 21 }, (_, i) => `${mixColor(cand, (endPos * i) / 20)} ${i * 5}%`).join(", ");
       bar.style.background = `linear-gradient(to right, ${stops})`;
     });
-    box.append(bar, ticks);
+    box.append(bar, ticks, el("div", "gradient-note", `Maior contribuição: ${ufName(topUf)}, ${fmtPct(top, 2)}`));
     return box;
   }
 
@@ -113,12 +117,29 @@ function render(root, data) {
     group.append(hit);
     paths.push({ uf, path: hit });
   }
-  function addLabels(svg) {
+  const bbox = {};
+  function box(uf) {
+    if (!bbox[uf]) {
+      const pts = ringsOf(MAP.states[uf].d).flat();
+      const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
+      bbox[uf] = { w: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) };
+    }
+    return bbox[uf];
+  }
+  // With `cand`, states that add 2% or more and are big enough also show their percentage; smaller ones rely on tap and the table.
+  function addLabels(svg, cand) {
     const labels = svgEl("g", { "pointer-events": "none" });
     ufs.forEach((uf) => {
-      const t = svgEl("text", { x: MAP.states[uf].cx, y: MAP.states[uf].cy, class: "map-label" });
+      const { cx, cy } = MAP.states[uf];
+      const showValue = cand && cand.byUf[uf].natPct >= 2 && box(uf).w >= 95 && box(uf).h >= 65;
+      const t = svgEl("text", { x: cx, y: showValue ? cy - 12 : cy, class: "map-label" });
       t.textContent = uf;
       labels.append(t);
+      if (showValue) {
+        const v = svgEl("text", { x: cx, y: cy + 12, class: "map-label map-value" });
+        v.textContent = fmtPct(cand.byUf[uf].natPct, 1);
+        labels.append(v);
+      }
     });
     svg.append(labels);
   }
@@ -180,7 +201,7 @@ function render(root, data) {
     const hits = svgEl("g");
     ufs.forEach((uf) => addHit(hits, uf, ariaFor(uf)));
     svg.append(shapes, hits);
-    addLabels(svg);
+    addLabels(svg, cand);
     card.append(gradientLegend(cand));
   });
   root.append(maps);
