@@ -1,7 +1,5 @@
 import { el, ufName, fmtInt, fmtPct, topCandidates, legend, attachTip, tipLine, tipKey, tableView, percentAxis } from "./shared.js";
 
-const ROWS_LABELED = 3; // value labels only on the largest rows; the rest live in tooltip and table
-
 function render(root, data) {
   const cands = topCandidates(data);
   const [a, b] = cands;
@@ -14,7 +12,7 @@ function render(root, data) {
   states.forEach((st, i) => (st.rank = i + 1));
 
   const maxShare = Math.max(...states.flatMap((s) => s.cells.map((c) => c.share)));
-  const axisMax = Math.ceil((maxShare + 2) / 2) * 2; // headroom for the value label
+  const axisMax = Math.ceil((maxShare + 4) / 2) * 2; // headroom for the value label
 
   const top = states[0];
   root.append(el("p", "chart-lead",
@@ -26,7 +24,7 @@ function render(root, data) {
   const card = el("div", "card");
   const plot = el("div", "plot");
   const rows = el("div", "rows");
-  states.forEach((st, i) => {
+  states.forEach((st) => {
     const row = el("div", "crow");
     row.setAttribute("aria-label", `${ufName(st.uf)}: ` + st.cells.map((c) => `${c.cand.name} ${fmtPct(c.share)} dos votos válidos do Brasil`).join(", "));
     row.append(el("div", "name", ufName(st.uf)));
@@ -37,7 +35,7 @@ function render(root, data) {
       bar.style.setProperty("--c", c.cand.color);
       bar.style.width = `${(c.share / axisMax) * 100}%`;
       line.append(bar);
-      if (i < ROWS_LABELED) line.append(el("span", "val", fmtPct(c.share)));
+      line.append(el("span", "val", fmtPct(c.share))); // touch screens have no hover, so every bar carries its value
       track.append(line);
     });
     row.append(track);

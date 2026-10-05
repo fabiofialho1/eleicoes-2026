@@ -45,7 +45,7 @@ function panel(cand, axisMax) {
 function render(root, data) {
   const cands = topCandidates(data);
   const maxShare = Math.max(...cands.flatMap((c) => Object.values(c.byUf).map((v) => v.natPct)));
-  const axisMax = Math.ceil((maxShare + 2) / 2) * 2; // same scale in both charts, with room for the value label
+  const axisMax = Math.ceil((maxShare + 4) / 2) * 2; // same scale in both charts, with room for the value label
 
   root.append(el("p", "chart-lead",
     "Cada barra mostra quanto do percentual nacional do candidato vem do estado. Somando os estados, chega-se ao resultado dele no Brasil. A escala é a mesma nos dois."));
