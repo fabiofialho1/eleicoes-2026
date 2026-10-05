@@ -8,37 +8,43 @@ const svgEl = (tag, attrs = {}) => {
   return e;
 };
 
-// Classes of contribution (% of ALL valid votes in Brazil that a candidate gets from one state), with the
-// share of the candidate's color each class uses. Classes read more easily than a continuous scale.
-const CLASSES = [
-  { min: 0, label: "menos de 1%", tint: 14 },
-  { min: 1, label: "1% a 2%", tint: 32 },
-  { min: 2, label: "2% a 4%", tint: 52 },
-  { min: 4, label: "4% a 8%", tint: 76 },
-  { min: 8, label: "8% ou mais", tint: 100 },
-];
-const classOf = (share) => [...CLASSES].reverse().find((c) => share >= c.min);
-const fillFor = (cand, share) => `color-mix(in oklab, ${cand.color} ${classOf(share).tint}%, var(--surface-1))`;
+// Contribution = % of ALL valid votes in Brazil that a candidate gets from one state. The color is a continuous
+// gradient of the candidate's own hue (light = small contribution, intense = large), on one scale shared by both maps.
+// The scale follows the square root of the share, so the many small states stay distinguishable next to São Paulo.
+const TICKS = [0, 1, 2, 4]; // plus the maximum, drawn at the right end
+const position = (share, max) => Math.sqrt(Math.max(0, share) / max); // 0..1 along the gradient
+const tintAt = (pos) => 8 + 92 * pos;
+const mix = (cand, pos) => `color-mix(in oklab, ${cand.color} ${tintAt(pos).toFixed(1)}%, var(--surface-1))`;
+
+// Gradient bar with value ticks, drawn in the candidate's color.
+function gradientLegend(cand, max) {
+  const box = el("div", "gradient-legend");
+  const stops = Array.from({ length: 11 }, (_, i) => `${mix(cand, i / 10)} ${i * 10}%`).join(", ");
+  const bar = el("div", "gradient-bar");
+  bar.style.background = `linear-gradient(to right, ${stops})`;
+  const ticks = el("div", "gradient-ticks");
+  [...TICKS.filter((t) => t < max - 3), max].forEach((v, i, all) => {
+    const t = el("span", null, fmtPct(v, v === max ? 1 : 0));
+    const pos = position(v, max);
+    t.style.left = `${pos * 100}%`;
+    if (i === all.length - 1) t.style.transform = "translateX(-100%)";
+    else if (i > 0) t.style.transform = "translateX(-50%)";
+    ticks.append(t);
+  });
+  box.append(bar, ticks);
+  return box;
+}
 
 function render(root, data) {
   const cands = topCandidates(data);
   const ufs = Object.keys(MAP.states);
   const abroad = cands.map((c) => c.byUf.ZZ);
+  const max = Math.max(...cands.flatMap((c) => ufs.map((uf) => c.byUf[uf].natPct))); // one scale for both maps
 
   root.append(el("p", "chart-lead",
     "Cada estado é pintado pelo quanto soma ao percentual nacional de cada candidato (votos do candidato no estado ÷ todos os votos válidos do Brasil). " +
-    "Quanto mais intensa a cor, maior a contribuição. A cor mostra o tamanho da contribuição, não quem ganhou no estado. Toque ou passe o mouse sobre um estado para ver os números."));
-
-  // Legend shared by both maps: the five classes.
-  const legend = el("div", "legend map-legend");
-  CLASSES.forEach((c, i) => {
-    const sp = el("span");
-    const sw = el("i", "swatch");
-    sw.style.background = `color-mix(in oklab, var(--text-secondary) ${c.tint}%, var(--surface-1))`;
-    sp.append(sw, document.createTextNode(c.label));
-    legend.append(sp);
-  });
-  root.append(legend);
+    "Quanto mais intensa a cor, maior a contribuição. A cor mostra o tamanho da contribuição, não quem ganhou no estado, e a escala é a mesma nos dois mapas. " +
+    "Toque ou passe o mouse sobre um estado para ver os números."));
 
   const maps = el("div", "maps");
   const paths = []; // one record per drawn state path, to highlight the same state in both maps
@@ -57,7 +63,7 @@ function render(root, data) {
       const st = MAP.states[uf];
       const share = cand.byUf[uf].natPct;
       const path = svgEl("path", { d: st.d, class: "map-state", tabindex: "0", role: "img", "aria-label": `${ufName(uf)}: ${fmtPct(share, 2)} dos votos válidos do Brasil, ${fmtInt.format(cand.byUf[uf].votes)} votos de ${cand.name}` });
-      path.style.fill = fillFor(cand, share);
+      path.style.fill = mix(cand, position(share, max));
       path.addEventListener("pointerenter", () => select(uf));
       path.addEventListener("click", () => select(uf));
       path.addEventListener("focus", () => select(uf));
@@ -69,7 +75,7 @@ function render(root, data) {
       labels.append(t);
     });
     svg.append(shapes, labels);
-    card.append(svg);
+    card.append(svg, gradientLegend(cand, max));
     maps.append(card);
   });
   root.append(maps);
