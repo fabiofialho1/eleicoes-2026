@@ -4,6 +4,7 @@ Site com gráficos e análises das eleições gerais de 2026 no Brasil, feitos c
 
 - `scripts/fetch-tse.mjs` — baixa a apuração por UF e grava `data/states.json`
 - `index.html` — página do site: lista os gráficos de `charts/registry.js` e lê `data/states.json`
+- `charts/cover.js` — a capa do site (layout do post do Instagram, 4:5); `charts/geometry.js` divide cada estado por área
 - `site.css` — tema claro/escuro e estilos dos gráficos
 - `scripts/make-map.mjs` — gera `charts/brazil-map.js` (contornos simplificados dos estados) a partir de um GeoJSON do IBGE
 - `charts/` — um arquivo por gráfico (`contribution.js`, `contribution-by-candidate.js`) e `shared.js` com as funções comuns
@@ -34,3 +35,9 @@ O rodapé mostra `Versão do código: AAAA-MM-DD HH:MM` (tag `app-version` no `<
 (horário da Alemanha, Europe/Berlin) para confirmar que a versão nova está no ar.
 
 Ao criar um arquivo de gráfico novo em `charts/`, acrescente-o também à lista `modules` no começo do `index.html` (sem isso ele continua funcionando, mas pode ficar em cache).
+
+## Capa e imagem do Instagram
+
+A tela inicial abre com a capa, desenhada no formato do post do Instagram (1080×1350, proporção 4:5) e montada a partir dos mesmos dados dos gráficos.
+O endereço `#capa` mostra só a capa, com exatamente 1080×1350 px. Para gerar a imagem, abra `index.html#capa` com uma janela de 1080 px de largura
+e salve a captura do elemento `.cover` (com fator de escala 2 sai a versão 2160×2700). Ao atualizar os dados, a capa e a imagem mudam juntas.
