@@ -4,7 +4,29 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eleições 2026 Brasil</title>
-<link rel="stylesheet" href="site.css">
+<!-- The code version lives here (shown in the footer); bump it on every change, in Europe/Berlin time. -->
+<meta name="app-version" content="Versão do código: 2026-10-05 13:42">
+<script>
+// Always load the newest deploy. GitHub Pages lets browsers keep files for about 10 minutes, so on the published
+// site every visit is redirected once to the same address with a unique ?_cb= value, which skips any cached copy.
+// The stylesheet, modules and data reuse that value, so they are fresh too. Elsewhere (local server, preview) it does nothing.
+(function () {
+  var m = location.search.match(/[?&]_cb=(\d+)/);
+  if (!m && location.hostname.endsWith("github.io")) {
+    location.replace(location.pathname + location.search + (location.search ? "&" : "?") + "_cb=" + Date.now() + location.hash);
+    return;
+  }
+  var q = m ? "?_cb=" + m[1] : "";
+  window.__CB = q;
+  // Module files that can change between deploys. A file missing from this list still works,
+  // it is only subject to the browser cache.
+  var modules = ["charts/registry.js", "charts/shared.js", "charts/contribution.js", "charts/contribution-by-candidate.js"];
+  var imports = {};
+  modules.forEach(function (f) { imports["./" + f] = "./" + f + q; });
+  document.write('<link rel="stylesheet" href="site.css' + q + '">');
+  document.write('<script type="importmap">' + JSON.stringify({ imports: imports }) + "<\/script>");
+})();
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -19,7 +41,6 @@
 <script type="module">
 import charts from "./charts/registry.js";
 import { el, hideTip } from "./charts/shared.js";
-import version from "./version.js";
 
 // Two kinds of screen, chosen by the URL hash: the list of charts (empty hash) and one chart (#<id>).
 // Each change of hash is a history entry, so the browser/Android back button goes from a chart to the list.
@@ -71,16 +92,15 @@ function route() {
   }
 }
 
-// Version stamp, so it is clear which deploy is live (a stale browser cache shows an older one).
-document.getElementById("version").textContent = version.builtAt
-  ? `Versão ${version.commit} · publicada em ${new Date(version.builtAt).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}`
-  : "Versão de desenvolvimento";
+// Version stamp, so it is clear which deploy is live.
+const stamp = document.querySelector('meta[name="app-version"]')?.content ?? "";
+document.getElementById("version").textContent = stamp;
 
 window.addEventListener("hashchange", route);
 route();
 
 try {
-  const res = await fetch("data/states.json" + (window.__BUILD ? "?v=" + window.__BUILD : ""));
+  const res = await fetch("data/states.json" + (window.__CB || ""));
   if (!res.ok) throw new Error(`data/states.json: ${res.status}`);
   data = await res.json();
   document.getElementById("status").textContent =

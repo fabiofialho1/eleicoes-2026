@@ -15,7 +15,6 @@ const body = html.match(/<body>\s*([\s\S]*?)\s*<\/body>/)[1];
 await mkdir(join(out, "data"), { recursive: true });
 await writeFile(join(out, "index.html"), `${title}\n${link}\n${body}\n`);
 await cp("site.css", join(out, "site.css"));
-await cp("version.js", join(out, "version.js"));
 await cp("charts", join(out, "charts"), { recursive: true });
 await cp("data/states.json", join(out, "data/states.json"));
 console.log("ok", out);
