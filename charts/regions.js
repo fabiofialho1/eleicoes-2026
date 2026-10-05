@@ -64,7 +64,28 @@ function render(root, data) {
     rows.append(row);
   });
   plot.append(percentAxis(axisMax, 10), rows);
-  card.append(plot, el("p", "rcap", "Pontos percentuais dos votos válidos do Brasil. O número ao lado de cada barra é o resultado do candidato."));
+  // Every value, in text, under the bars: narrow segments cannot always hold their number.
+  const vals = el("div", "rvals");
+  cands.forEach((cand) => {
+    const line = el("div", "rline");
+    const who = el("b", "rline-who");
+    const sw = el("i", "swatch"); sw.style.setProperty("--c", cand.color);
+    who.append(sw, document.createTextNode(cand.short));
+    line.append(who);
+    const fmt2 = (x) => x.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+    regions.forEach((r) => {
+      const pp = r.ufs.reduce((a, u) => a + cand.byUf[u].natPct, 0);
+      const item = el("span", "rline-item");
+      const chip = el("i", "swatch"); chip.style.background = `var(${r.color})`;
+      item.append(chip, document.createTextNode(`${r.label} `), el("b", null, fmt2(pp)));
+      line.append(item);
+    });
+    const ext = el("span", "rline-item");
+    ext.append(document.createTextNode("Exterior "), el("b", null, cand.byUf.ZZ.natPct.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })));
+    line.append(ext, el("span", "rline-total", `= ${fmtPct(cand.natPct, 2)}`));
+    vals.append(line);
+  });
+  card.append(plot, vals, el("p", "rcap", "Pontos percentuais dos votos válidos do Brasil. O número ao lado de cada barra é o resultado do candidato."));
   root.append(card);
   watchTheme(() => labelPaint.forEach((fn) => fn()));
   const fitLabels = () => labelBoxes.forEach(({ seg, label }) => { label.style.visibility = "visible"; label.style.visibility = seg.clientWidth < label.offsetWidth + 10 ? "hidden" : "visible"; });
