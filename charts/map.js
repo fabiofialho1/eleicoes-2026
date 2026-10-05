@@ -19,10 +19,16 @@ function token(name) {
   return m ? [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16)) : [128, 128, 128];
 }
 const position = (share, max) => Math.sqrt(Math.max(0, share) / max); // 0..1 along the gradient
-const tintAt = (pos) => 0.08 + 0.92 * pos;
+// Two-part ramp: surface -> candidate color (first 60% of the scale), then candidate color -> a deeper shade of it
+// (darker on a light page, lighter on a dark page). The wide range makes neighbouring states easier to tell apart.
+const BASE_AT = 0.6;
+const lerp = (from, to, t) => from.map((c, i) => c + (to[i] - c) * t);
+const luminance = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
 function mixColor(cand, pos) {
-  const fg = token(cand.token), bg = token("--surface-1"), t = tintAt(pos);
-  return `rgb(${fg.map((c, i) => Math.round(bg[i] + (c - bg[i]) * t)).join(",")})`;
+  const fg = token(cand.token), bg = token("--surface-1");
+  const deep = lerp(fg, luminance(bg) < 0.35 ? [255, 255, 255] : [0, 0, 0], 0.5);
+  const rgb = pos <= BASE_AT ? lerp(bg, fg, 0.05 + 0.95 * (pos / BASE_AT)) : lerp(fg, deep, (pos - BASE_AT) / (1 - BASE_AT));
+  return `rgb(${rgb.map(Math.round).join(",")})`;
 }
 
 // ---- Geometry helpers: split a state into two parts whose AREAS match given proportions.
@@ -80,7 +86,7 @@ function render(root, data) {
       ticks.append(t);
     });
     recolor.push(() => {
-      const stops = Array.from({ length: 11 }, (_, i) => `${mixColor(cand, i / 10)} ${i * 10}%`).join(", ");
+      const stops = Array.from({ length: 21 }, (_, i) => `${mixColor(cand, i / 20)} ${i * 5}%`).join(", ");
       bar.style.background = `linear-gradient(to right, ${stops})`;
     });
     box.append(bar, ticks);
