@@ -25,15 +25,22 @@ const titleCase = (s) => s.toLowerCase().replace(/(^|\s)\S/g, (m) => m.toUpperCa
 
 // The two most voted candidates nationally, in order, each with a fixed color slot
 // (color follows the candidate, never the rank within a filtered view).
+// natPct = votes as a percent of ALL valid votes in Brazil; summed over the states it equals
+// the candidate's official national percentage.
 export function topCandidates(data, n = 2) {
+  const validTotal = Object.values(data.states).reduce((a, s) => a + s.validVotes, 0);
   return data.brazil.candidates.slice(0, n).map((c, i) => {
     const name = DISPLAY_NAMES[c.number] ?? titleCase(c.name);
     const byUf = Object.fromEntries(Object.entries(data.states).map(([uf, s]) => {
       const m = s.candidates.find((x) => x.number === c.number);
-      return [uf, { votes: m ? m.votes : 0, pct: m ? m.pct : 0 }];
+      const votes = m ? m.votes : 0;
+      return [uf, { votes, pct: m ? m.pct : 0, natPct: (votes / validTotal) * 100 }];
     }));
     const total = Object.values(byUf).reduce((a, v) => a + v.votes, 0);
-    return { number: c.number, name, short: name.split(" ")[0], party: c.party, color: `var(--series-${i + 1})`, byUf, total };
+    return {
+      number: c.number, name, short: name.split(" ")[0], party: c.party, color: `var(--series-${i + 1})`,
+      byUf, total, natPct: (total / validTotal) * 100, validTotal,
+    };
   });
 }
 
