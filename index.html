@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Eleições 2026</title>
+<style>
+  :root { --bg:#fff; --fg:#1b1f24; --muted:#6b7280; --a:#1d4ed8; --b:#dc2626; --o:#9ca3af; color-scheme: light dark; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111418; --fg:#e8eaed; --muted:#9aa0a6; --a:#60a5fa; --b:#f87171; --o:#6b7280; } }
+  body { margin:0; padding:16px; background:var(--bg); color:var(--fg); font:16px system-ui,sans-serif; max-width:720px; margin-inline:auto; }
+  h1 { font-size:1.25rem; } small { color:var(--muted); }
+  .row { display:grid; grid-template-columns:2.2rem 1fr 3.2rem; gap:8px; align-items:center; margin:6px 0; }
+  .bar { display:flex; height:18px; border-radius:3px; overflow:hidden; background:var(--o); }
+  .bar i { display:block; } .a { background:var(--a); } .b { background:var(--b); }
+  .legend span { margin-right:12px; } .legend b { display:inline-block; width:10px; height:10px; border-radius:2px; }
+</style>
+</head>
+<body>
+<h1>Presidente 2026, 1º turno: votação por estado</h1>
+<p class="legend"><span><b class="a"></b> Flávio Bolsonaro</span><span><b class="b"></b> Lula</span><span><b style="background:var(--o)"></b> Outros</span></p>
+<div id="chart">Carregando…</div>
+<p><small id="meta"></small></p>
+<script type="module">
+const res = await fetch("data/states.json");
+const data = await res.json();
+const find = (cands, re) => cands.find((c) => re.test(c.name));
+const rows = Object.entries(data.states).map(([uf, s]) => {
+  const f = find(s.candidates, /FL[ÁA]VIO/i), l = find(s.candidates, /LULA/i);
+  return { uf, f: f?.pct ?? 0, l: l?.pct ?? 0 };
+}).sort((x, y) => (y.f - y.l) - (x.f - x.l));
+document.getElementById("chart").innerHTML = rows.map((r) =>
+  `<div class="row"><span>${r.uf}</span><div class="bar" title="Flávio ${r.f}% · Lula ${r.l}%">` +
+  `<i class="a" style="width:${r.f}%"></i><i class="b" style="width:${r.l}%"></i></div>` +
+  `<small>${(r.f - r.l).toFixed(1)}</small></div>`).join("");
+document.getElementById("meta").textContent = `Fonte: TSE · coletado em ${new Date(data.fetchedAt).toLocaleString("pt-BR")}. Número à direita: diferença Flávio − Lula (p.p.).`;
+</script>
+</body>
+</html>
