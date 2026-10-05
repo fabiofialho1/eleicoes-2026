@@ -110,3 +110,17 @@ export function tableView(summary, headers, rows) {
   details.append(wrap);
   return details;
 }
+
+// Horizontal 0..axisMax percent axis for bar charts that start after a name column.
+export function percentAxis(axisMax, step = 5) {
+  const grid = el("div", "plotgrid");
+  for (let t = 0; t <= axisMax; t += step) {
+    const left = (t / axisMax) * 100 + "%";
+    if (t > 0) { const g = el("div", "gridline"); g.style.left = left; grid.append(g); }
+    const tk = el("div", t === 0 ? "tick tick0" : "tick", t + "%");
+    tk.style.left = left;
+    grid.append(tk);
+  }
+  grid.append(el("div", "axis0"));
+  return grid;
+}

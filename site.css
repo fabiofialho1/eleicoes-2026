@@ -96,6 +96,20 @@ a { color: var(--text-secondary); }
 .bar { height: 11px; background: var(--c); border-radius: 0 4px 4px 0; min-width: 2px; }
 .val { margin-left: 4px; padding: 0 4px; background: var(--surface-1); font-size: 11px; font-weight: 600; white-space: nowrap; line-height: 11px; }
 
+/* contribution by candidate: one single-series panel per candidate */
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; --namew: 150px; }
+@media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+@media (max-width: 480px) { .pair { --namew: 132px; } }
+.pair .card { min-width: 0; }
+.panel-head { display: flex; align-items: center; gap: 8px; }
+.panel-head h3 { margin: 0; font-size: 16px; font-weight: 650; }
+.panel-meta { margin: 2px 0 12px; font-size: 13px; color: var(--text-secondary); }
+.srow { display: grid; grid-template-columns: var(--namew) 1fr; align-items: center; height: 24px; border-radius: 6px; outline: none; }
+.srow:hover, .srow:focus-visible { background: color-mix(in srgb, var(--grid) 55%, transparent); }
+.srow .bar { height: 14px; }
+.srow .barline { height: 14px; }
+.srow .val { font-size: 12px; line-height: 14px; }
+
 /* table view */
 .tableview { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 12px; padding: 12px 16px; }
 .tableview summary { cursor: pointer; font-weight: 600; font-size: 14px; }

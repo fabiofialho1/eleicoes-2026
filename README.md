@@ -5,7 +5,7 @@ Site com gráficos e análises das eleições gerais de 2026 no Brasil, feitos c
 - `scripts/fetch-tse.mjs` — baixa a apuração por UF e grava `data/states.json`
 - `index.html` — página do site: lista os gráficos de `charts/registry.js` e lê `data/states.json`
 - `site.css` — tema claro/escuro e estilos dos gráficos
-- `charts/` — um arquivo por gráfico (hoje `contribution.js`) e `shared.js` com as funções comuns
+- `charts/` — um arquivo por gráfico (`contribution.js`, `contribution-by-candidate.js`) e `shared.js` com as funções comuns
 - `scripts/make-share.mjs` — prepara os arquivos para publicar como página hospedada
 
 ## Uso

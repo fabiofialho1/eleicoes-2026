@@ -1,20 +1,6 @@
-import { el, ufName, fmtInt, fmtPct, topCandidates, legend, attachTip, tipLine, tipKey, tableView } from "./shared.js";
+import { el, ufName, fmtInt, fmtPct, topCandidates, legend, attachTip, tipLine, tipKey, tableView, percentAxis } from "./shared.js";
 
 const ROWS_LABELED = 3; // value labels only on the largest rows; the rest live in tooltip and table
-
-function axis(axisMax) {
-  const grid = el("div", "plotgrid");
-  for (let t = 0; t <= axisMax; t += 5) {
-    const left = (t / axisMax) * 100 + "%";
-    if (t > 0) { const g = el("div", "gridline"); g.style.left = left; grid.append(g); }
-    const tk = el("div", t === 0 ? "tick tick0" : "tick", t + "%");
-    tk.style.left = left;
-    grid.append(tk);
-  }
-  const base = el("div", "axis0");
-  grid.append(base);
-  return grid;
-}
 
 function render(root, data) {
   const cands = topCandidates(data);
@@ -70,7 +56,7 @@ function render(root, data) {
     });
     rows.append(row);
   });
-  plot.append(axis(axisMax), rows);
+  plot.append(percentAxis(axisMax), rows);
   card.append(plot);
   root.append(card);
 
@@ -81,7 +67,7 @@ function render(root, data) {
 
 export default {
   id: "contribuicao",
-  title: "Quanto cada estado contribui para os votos de cada candidato",
-  description: "Presidente, 1º turno: de que estados vem o total de votos de cada um dos dois candidatos mais votados.",
+  title: "Contribuição dos estados: comparação entre os dois candidatos",
+  description: "Presidente, 1º turno: de que estados vem o total de votos de cada um dos dois candidatos mais votados, lado a lado.",
   render,
 };
