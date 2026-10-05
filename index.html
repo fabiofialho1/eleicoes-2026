@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eleições 2026 Brasil</title>
 <!-- The code version lives here (shown in the footer); bump it on every change, in Europe/Berlin time. -->
-<meta name="app-version" content="Versão do código: 2026-10-05 15:29">
+<meta name="app-version" content="Versão do código: 2026-10-05 15:34">
 <script>
 // Always load the newest deploy. GitHub Pages lets browsers keep files for about 10 minutes, so on the published
 // site every visit is redirected once to the same address with a unique ?_cb= value, which skips any cached copy.
@@ -23,7 +23,7 @@
   window.__CB = q;
   // Module files that can change between deploys. A file missing from this list still works,
   // it is only subject to the browser cache.
-  var modules = ["charts/registry.js", "charts/shared.js", "charts/brazil-map.js", "charts/map.js", "charts/regions.js", "charts/contribution.js", "charts/contribution-by-candidate.js"];
+  var modules = ["charts/registry.js", "charts/shared.js", "charts/brazil-map.js", "charts/geometry.js", "charts/cover.js", "charts/map.js", "charts/regions.js", "charts/contribution.js", "charts/contribution-by-candidate.js"];
   var imports = {};
   modules.forEach(function (f) { imports["./" + f] = "./" + f + q; });
   document.write('<link rel="stylesheet" href="site.css' + q + '">');
@@ -33,6 +33,7 @@
 </head>
 <body>
 <div class="wrap">
+  <div id="cover-slot"></div>
   <header class="site-head">
     <h1 id="site-title"><a href="#">Eleições 2026 · Brasil</a></h1>
     <p>Gráficos e análises das eleições gerais de 2026, feitos com os dados abertos do TSE. Novos gráficos entram aos poucos.</p>
@@ -44,6 +45,7 @@
 <script type="module">
 import charts from "./charts/registry.js";
 import { el, hideTip } from "./charts/shared.js";
+import { renderCover } from "./charts/cover.js";
 
 // Two kinds of screen, chosen by the URL hash: the list of charts (empty hash) and one chart (#<id>).
 // Each change of hash is a history entry, so the browser/Android back button goes from a chart to the list.
@@ -80,7 +82,12 @@ function chartScreen(chart) {
 
 function route() {
   hideTip();
-  const chart = charts.find((c) => c.id === location.hash.slice(1));
+  const hash = location.hash.slice(1);
+  const chart = charts.find((c) => c.id === hash);
+  const slot = document.getElementById("cover-slot");
+  // The cover (the Instagram post layout) is the front page. #capa shows only the cover, at 1080 x 1350, for the picture.
+  document.body.classList.toggle("capa", hash === "capa");
+  if ((!chart || hash === "capa") && data) renderCover(slot, data); else slot.replaceChildren();
   screen.replaceChildren();
   if (chart) {
     const { sec, h2 } = chartScreen(chart);
@@ -94,10 +101,6 @@ function route() {
     window.scrollTo(0, 0);
   }
 }
-
-// Version stamp, so it is clear which deploy is live.
-const stamp = document.querySelector('meta[name="app-version"]')?.content ?? "";
-document.getElementById("version").textContent = stamp;
 
 window.addEventListener("hashchange", route);
 route();

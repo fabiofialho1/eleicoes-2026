@@ -9,6 +9,8 @@ Static site (GitHub Pages from `main`, no build step) with charts of the 2026 Br
 - Each chart is a module in `charts/` exporting `{ id, title, description, render(root, data) }`, listed in `charts/registry.js` (and in `modules` in the `index.html` head, for cache busting).
 - The election is decided by the national total of votes. Do not build charts that rank or compare states against each other as rivals; show how each state adds to a candidate's national result. Maps are colored by that contribution (one hue per candidate, intensity from the contribution), never with a single color for the candidate who won the state. A state may be split between the two candidates in proportion to their votes.
 
+- The front page is the cover (`charts/cover.js`): the layout of the Instagram post (4:5, 1080 x 1350, sizes in `u` units = width / 1080). `index.html#capa` shows only the cover at exactly 1080 x 1350; the Instagram picture is a screenshot of `.cover` there. The cover keeps its own light palette on purpose and is not listed in `charts/registry.js`.
+
 ## Versioning
 
 - On every change to the site files, update `<meta name="app-version" content="Versão do código: YYYY-MM-DD HH:MM">` in `index.html` to the current date and time in Europe/Berlin. The footer shows it, and the owner uses it to confirm the latest deploy is live.
