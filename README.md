@@ -1,6 +1,6 @@
 # Eleições 2026
 
-Gráfico da votação para presidente (1º turno) por estado, com dados do TSE.
+Site com gráficos e análises das eleições gerais de 2026 no Brasil, feitos com dados abertos do TSE. Os gráficos entram aos poucos.
 
 - `scripts/fetch-tse.mjs` — baixa a apuração por UF e grava `data/states.json`
 - `index.html` — página do site: lista os gráficos de `charts/registry.js` e lê `data/states.json`
