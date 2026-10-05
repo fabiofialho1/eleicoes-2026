@@ -173,6 +173,7 @@ export function renderCover(root, data) {
   cv.append(el("div", "cv-rnote", `Pontos percentuais dos votos válidos do Brasil. O exterior (${num2(F.byUf.ZZ.natPct)} e ${num2(L.byUf.ZZ.natPct)}) soma ao total e não cabe na barra.`));
 
   const close = el("div", "cv-close");
+  close.append(el("p", null, "Todos os gráficos: fabiofialho1.github.io/eleicoes-2026"));
   close.append(el("small", null, `Fonte: TSE (resultados.tse.jus.br), apuração de ${data.brazil.updatedAt.slice(0, 10)}, ${fmtPct(data.brazil.countedPct, 2)} das seções. Votos válidos. Nordeste: AL, BA, CE, MA, PB, PE, PI, RN e SE.`));
   cv.append(close);
 
