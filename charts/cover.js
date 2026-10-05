@@ -37,11 +37,8 @@ export function renderCover(root, data) {
   kicker.append(el("span", "cv-kicker", "Eleições 2026 · Presidente · 1º turno"), el("span", "cv-pill", "Vai para o 2º turno"));
   cv.append(kicker);
   const h1 = el("h2", "cv-h1");
-  h1.append(document.createTextNode("Não existe “candidato A"), document.createElement("br"), document.createTextNode("ganhou no estado X”."));
+  h1.append(document.createTextNode("Um estado sozinho não elege"), document.createElement("br"), document.createTextNode("presidente: o que vale é o"), document.createElement("br"), el("em", null, "total no Brasil"), document.createTextNode("."));
   cv.append(h1);
-  const sub = el("div", "cv-sub");
-  sub.append(document.createTextNode("Na eleição para presidente, ganha quem tem mais votos no "), el("b", null, "total do Brasil"), document.createTextNode(", não por estado."));
-  cv.append(sub);
 
   // ---- map: each state split by AREA in proportion to the two candidates' votes
   const wrap = el("div", "cv-mapwrap");
