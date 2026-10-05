@@ -9,48 +9,81 @@
 <body>
 <div class="wrap">
   <header class="site-head">
-    <h1>Eleições 2026 · Brasil</h1>
+    <h1 id="site-title"><a href="#">Eleições 2026 · Brasil</a></h1>
     <p>Gráficos e análises das eleições gerais de 2026, feitos com os dados abertos do TSE. Novos gráficos entram aos poucos.</p>
     <p class="status" id="status">Carregando dados…</p>
-    <ul class="toc" id="toc" aria-label="Gráficos neste site"></ul>
   </header>
-  <main id="charts"></main>
+  <main id="screen"></main>
   <p class="foot">Fonte: <a href="https://resultados.tse.jus.br">resultados.tse.jus.br</a> (TSE). Código e dados: <a href="https://github.com/fabiofialho1/eleicoes-2026">github.com/fabiofialho1/eleicoes-2026</a>.</p>
 </div>
 <script type="module">
 import charts from "./charts/registry.js";
-import { el } from "./charts/shared.js";
+import { el, hideTip } from "./charts/shared.js";
 
-const toc = document.getElementById("toc");
-const main = document.getElementById("charts");
-const sections = charts.map((c) => {
-  const li = el("li"), a = el("a", null, c.title);
-  a.href = "#" + c.id;
-  li.append(a);
-  toc.append(li);
+// Two kinds of screen, chosen by the URL hash: the list of charts (empty hash) and one chart (#<id>).
+// Each change of hash is a history entry, so the browser/Android back button goes from a chart to the list.
+const screen = document.getElementById("screen");
+let data = null;
+let loadError = null;
+
+function home() {
+  const list = el("div", "home-list");
+  for (const c of charts) {
+    const a = el("a", "home-card");
+    a.href = "#" + c.id;
+    a.append(el("h2", null, c.title), el("p", null, c.description), el("span", "home-go", "Abrir gráfico →"));
+    list.append(a);
+  }
+  return list;
+}
+
+function chartScreen(chart) {
   const sec = el("section", "chart");
-  sec.id = c.id;
-  sec.append(el("h2", null, c.title), el("p", "chart-desc", c.description));
+  const back = el("a", "back", "← Todos os gráficos");
+  back.href = "#";
+  const h2 = el("h2", null, chart.title);
+  h2.tabIndex = -1;
   const body = el("div", "chart-body");
-  sec.append(body);
-  main.append(sec);
-  return { chart: c, body };
-});
+  sec.append(back, h2, el("p", "chart-desc", chart.description), body);
+  if (loadError) body.append(el("p", "error", `Não foi possível carregar os dados: ${loadError}. Abra o site por um servidor (npx serve .).`));
+  else if (data) {
+    try { chart.render(body, data); }
+    catch (e) { body.append(el("p", "error", `Não foi possível desenhar este gráfico: ${e.message}`)); }
+  }
+  return { sec, h2 };
+}
+
+function route() {
+  hideTip();
+  const chart = charts.find((c) => c.id === location.hash.slice(1));
+  screen.replaceChildren();
+  if (chart) {
+    const { sec, h2 } = chartScreen(chart);
+    screen.append(sec);
+    document.title = `${chart.title} · Eleições 2026 Brasil`;
+    window.scrollTo(0, 0);
+    h2.focus({ preventScroll: true });
+  } else {
+    screen.append(home());
+    document.title = "Eleições 2026 Brasil";
+    window.scrollTo(0, 0);
+  }
+}
+
+window.addEventListener("hashchange", route);
+route();
 
 try {
   const res = await fetch("data/states.json");
   if (!res.ok) throw new Error(`data/states.json: ${res.status}`);
-  const data = await res.json();
+  data = await res.json();
   document.getElementById("status").textContent =
     `Presidente, 1º turno · apuração de ${data.brazil.updatedAt} (${data.brazil.countedPct.toLocaleString("pt-BR")}% das seções).`;
-  for (const { chart, body } of sections) {
-    try { chart.render(body, data); }
-    catch (e) { body.append(el("p", "error", `Não foi possível desenhar este gráfico: ${e.message}`)); }
-  }
 } catch (e) {
+  loadError = e.message;
   document.getElementById("status").textContent = "";
-  sections.forEach(({ body }) => body.append(el("p", "error", `Não foi possível carregar os dados: ${e.message}. Abra o site por um servidor (npx serve .).`)));
 }
+route();
 </script>
 </body>
 </html>
