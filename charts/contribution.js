@@ -4,11 +4,12 @@ function render(root, data) {
   const cands = topCandidates(data);
   const [a, b] = cands;
 
-  // One entry per state: a cell per candidate, ordered by the first candidate's votes in the state.
+  // One entry per state: a cell per candidate, ordered by the state's total valid votes (a neutral order).
   const states = Object.keys(data.states).map((uf) => ({
     uf,
+    valid: data.states[uf].validVotes,
     cells: cands.map((c) => ({ cand: c, votes: c.byUf[uf].votes, share: c.byUf[uf].natPct })),
-  })).sort((x, y) => y.cells[0].votes - x.cells[0].votes);
+  })).sort((x, y) => y.valid - x.valid);
   states.forEach((st, i) => (st.rank = i + 1));
 
   const maxShare = Math.max(...states.flatMap((s) => s.cells.map((c) => c.share)));
@@ -18,7 +19,7 @@ function render(root, data) {
   root.append(el("p", "chart-lead",
     `${a.short} teve ${fmtPct(a.natPct, 2)} dos votos válidos do Brasil; ${b.short}, ${fmtPct(b.natPct, 2)}. ` +
     `Cada barra mostra quanto desse percentual vem de um estado (${ufName(top.uf)}, por exemplo, soma ${fmtPct(top.cells[0].share)} para ${a.short}). ` +
-    `Somando todos os estados, chega-se ao total do candidato.`));
+    `Somando todos os estados, chega-se ao total do candidato. Estados do maior para o menor em votos válidos.`));
   root.append(legend(cands.map((c) => ({ color: c.color, label: `${c.name} (${c.party}) · ${fmtPct(c.natPct, 2)} dos votos válidos` }))));
 
   const card = el("div", "card");
@@ -46,6 +47,8 @@ function render(root, data) {
         val.append(el("b", null, fmtPct(c.share, 2)), document.createTextNode(` · ${fmtInt.format(c.votes)} votos`));
         tip.append(tipLine(tipKey(c.cand.color, c.cand.name), val));
       });
+      tip.append(el("div", "tip-sep"));
+      tip.append(tipLine(el("span", null, "Votos válidos no estado"), el("span", null, fmtInt.format(st.valid))));
     });
     rows.append(row);
   });
@@ -54,8 +57,8 @@ function render(root, data) {
   root.append(card);
 
   root.append(tableView("Ver tabela com todas as UFs",
-    ["UF", ...cands.flatMap((c) => [`${c.name} (votos)`, "% dos votos válidos do Brasil"])],
-    states.map((st) => [ufName(st.uf), ...st.cells.flatMap((c) => [fmtInt.format(c.votes), fmtPct(c.share, 2)])])));
+    ["UF", "Votos válidos no estado", ...cands.flatMap((c) => [`${c.name} (votos)`, "% dos votos válidos do Brasil"])],
+    states.map((st) => [ufName(st.uf), fmtInt.format(st.valid), ...st.cells.flatMap((c) => [fmtInt.format(c.votes), fmtPct(c.share, 2)])])));
 }
 
 export default {
