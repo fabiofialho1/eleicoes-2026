@@ -248,6 +248,18 @@ body.capa .site-head, body.capa .foot, body.capa #screen { display: none; }
 body.capa .cover { width: 1080px; height: 1350px; border-radius: 0; box-shadow: none; margin: 0; }
 
 
+/* grouped regions: balance of each group */
+.margins h3 { margin: 0 0 8px; font-size: 16px; font-weight: 650; }
+.margin-table { width: 100%; font-size: 14px; }
+.margin-table th, .margin-table td { white-space: normal; padding: 6px 8px; }
+@media (max-width: 480px) { .margin-table { font-size: 13px; } .margin-table th, .margin-table td { padding: 6px 4px; } }
+.margin-table th { text-align: left; color: var(--text-secondary); font-weight: 600; }
+.margin-table th:not(:first-child), .margin-table td:not(:first-child) { text-align: right; }
+.margin-table td { font-variant-numeric: tabular-nums; }
+.margin-table tr.total td { font-weight: 700; border-top: 2px solid var(--axis); }
+.margin-note { margin: 12px 0 0; font-size: 14px; color: var(--text-primary); max-width: 78ch; }
+.margin-note.muted { color: var(--text-secondary); font-size: 13px; }
+
 /* table view */
 .tableview { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 12px; padding: 12px 16px; }
 .tableview summary { cursor: pointer; font-weight: 600; font-size: 14px; }
