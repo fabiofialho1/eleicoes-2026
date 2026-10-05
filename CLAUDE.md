@@ -7,7 +7,7 @@ Static site (GitHub Pages from `main`, no build step) with charts of the 2026 Br
 - Code, comments, commit messages and PRs: English. User-facing text: Portuguese (pt-BR). Documentation for the user (`README.md`): Portuguese. Talk to the user in Portuguese.
 - Stored data uses ids (UF codes, candidate numbers); labels are looked up at render time (`charts/shared.js`).
 - Each chart is a module in `charts/` exporting `{ id, title, description, render(root, data) }`, listed in `charts/registry.js` (and in `modules` in the `index.html` head, for cache busting).
-- The election is decided by the national total of votes. Do not build charts that rank or compare states against each other as rivals; show how each state adds to a candidate's national result. Maps are colored by that contribution (one hue per candidate), never by which candidate won the state.
+- The election is decided by the national total of votes. Do not build charts that rank or compare states against each other as rivals; show how each state adds to a candidate's national result. Maps are colored by that contribution (one hue per candidate, intensity from the contribution), never with a single color for the candidate who won the state. A state may be split between the two candidates in proportion to their votes.
 
 ## Versioning
 
