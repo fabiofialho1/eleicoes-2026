@@ -121,6 +121,24 @@ a { color: var(--text-secondary); }
 .srow .barline { height: 18px; }
 .srow .val { font-size: 12px; line-height: 18px; }
 
+/* map of contributions */
+.maps { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 760px) { .maps { grid-template-columns: 1fr; } }
+.map-card { min-width: 0; }
+.map-svg { display: block; width: 100%; height: auto; max-height: 70vh; margin: 0 auto; }
+.map-state { stroke: var(--surface-1); stroke-width: 1.4; stroke-linejoin: round; cursor: pointer; outline: none; }
+.map-state:hover { stroke: var(--text-secondary); }
+.map-state.selected, .map-state:focus-visible { stroke: var(--text-primary); stroke-width: 3.2; }
+.map-label { font-size: 22px; font-weight: 600; text-anchor: middle; dominant-baseline: central; fill: var(--text-primary);
+  paint-order: stroke; stroke: var(--surface-1); stroke-width: 4px; stroke-linejoin: round; }
+.map-legend { gap: 8px 18px; }
+.map-readout { display: flex; flex-direction: column; gap: 6px; }
+.map-readout h3 { margin: 0 0 2px; font-size: 16px; font-weight: 650; }
+.readout-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 14px; }
+.readout-name { color: var(--text-secondary); min-width: 120px; }
+.readout-val b { font-size: 15px; }
+.readout-note { margin: 2px 0 0; font-size: 13px; color: var(--text-secondary); }
+
 /* table view */
 .tableview { background: var(--surface-1); border: 1px solid var(--grid); border-radius: 12px; padding: 12px 16px; }
 .tableview summary { cursor: pointer; font-weight: 600; font-size: 14px; }
