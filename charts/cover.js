@@ -71,7 +71,9 @@ export function renderCover(root, data) {
     const row = el("div", "cv-legend");
     const who = el("div", "cv-who");
     const dot = el("i", "cv-dot"); dot.style.background = `rgb(${CAND_RGB[i].join(",")})`;
-    who.append(dot, document.createTextNode(c.name));
+    const txt = el("div", "cv-whotxt");
+    txt.append(el("b", null, c.name), el("span", "cv-pts", `${fmtPct(c.natPct, 2)} dos votos válidos do Brasil`));
+    who.append(dot, txt);
     const bar = el("div", "cv-bar");
     bar.style.background = `linear-gradient(to right, ${Array.from({ length: 21 }, (_, k) => `${ramp(CAND_RGB[i], (end * k) / 20)} ${k * 5}%`).join(", ")})`;
     const ticks = el("div", "cv-ticks");
@@ -96,7 +98,7 @@ export function renderCover(root, data) {
   cv.append(st);
 
   // ---- regions: two small donuts around a shared legend
-  cv.append(el("div", "cv-rgtitle", "De onde vem o total de cada candidato, por região"));
+  cv.append(el("div", "cv-rgtitle", "Origem dos votos de cada candidato, por região"));
   const regs = REGIONS.map((r) => ({ ...r, valid: r.ufs.reduce((a, u) => a + data.states[u].validVotes, 0) })).sort((a, b) => b.valid - a.valid);
   const share = (c, r) => (r.ufs.reduce((a, u) => a + c.byUf[u].votes, 0) / c.total) * 100;
   const donut = (c) => {
@@ -109,8 +111,8 @@ export function renderCover(root, data) {
       const isNe = NE_IDS.includes(r.id);
       s.append(svgEl("path", { d: `M${x0} ${y0}A${RO} ${RO} 0 ${big} 1 ${x1} ${y1}L${x2} ${y2}A${RI} ${RI} 0 ${big} 0 ${x3} ${y3}Z`, fill: REGION_HEX[r.id], stroke: isNe ? "#0b0b0b" : "#f6f7f9", "stroke-width": isNe ? 4 : 3, "stroke-linejoin": "round" }));
     });
-    const t1 = svgEl("text", { x: CX, y: CY + 4, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#0b0b0b" }); t1.textContent = fmtPct(c.natPct, 2);
-    const t2 = svgEl("text", { x: CX, y: CY + 30, "text-anchor": "middle", "font-size": 19, fill: "#4a4a47" }); t2.textContent = "dos votos válidos";
+    const t1 = svgEl("text", { x: CX, y: CY + 4, "text-anchor": "middle", "font-size": 40, "font-weight": 700, fill: "#0b0b0b" }); t1.textContent = `${(c.total / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} mi`;
+    const t2 = svgEl("text", { x: CX, y: CY + 30, "text-anchor": "middle", "font-size": 19, fill: "#4a4a47" }); t2.textContent = "de votos";
     s.append(t1, t2);
     return s;
   };
@@ -120,7 +122,7 @@ export function renderCover(root, data) {
   const chip = (rgb) => { const i = el("i", "cv-hd"); i.style.background = `rgb(${rgb.join(",")})`; return i; };
   hf.append(chip(CAND_RGB[0]), document.createTextNode(F.short));
   hl.append(document.createTextNode(L.short), chip(CAND_RGB[1]));
-  head.append(hf, el("span"), hl);
+  head.append(hf, el("span", "cv-hint", "% dos votos de cada um"), hl);
   table.append(head);
   regs.forEach((r) => {
     const row = el("div", r.id === "northeast" ? "cv-row cv-ne-row" : "cv-row");

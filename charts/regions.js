@@ -23,7 +23,8 @@ function render(root, data) {
   const abroadShare = (c) => (c.byUf.ZZ.votes / c.total) * 100;
 
   root.append(el("p", "chart-lead",
-    "Cada anel soma o total do candidato (100%). Cada região tem a mesma cor nos dois anéis, para comparar o tamanho das fatias, e as regiões seguem a mesma ordem, da que tem mais votos válidos à que tem menos. Passe o mouse ou toque em uma fatia para ver os detalhes."));
+    `Cada anel soma os votos do candidato (100%). Os percentuais mostram a parte dos votos dele que vem de cada região. Não são o resultado dele no Brasil, que é ${fmtPct(cands[0].natPct, 2)} dos votos válidos para ${cands[0].short} e ${fmtPct(cands[1].natPct, 2)} para ${cands[1].short}. ` +
+    "Cada região tem a mesma cor nos dois anéis, para comparar o tamanho das fatias, e as regiões seguem a mesma ordem, da que tem mais votos válidos à que tem menos. Passe o mouse ou toque em uma fatia para ver os detalhes."));
 
   const grid = el("div", "donuts");
   const repaint = [];
@@ -64,11 +65,12 @@ function render(root, data) {
       path.style.fill = `var(${r.color})`;
       return { path, label, region: r };
     });
-    const num = svgEl("text", { x: CX, y: CY - 2, class: "donut-num" }); num.textContent = fmtPct(cand.natPct, 2);
-    const cap = svgEl("text", { x: CX, y: CY + 22, class: "donut-cap" }); cap.textContent = "dos votos válidos";
+    const num = svgEl("text", { x: CX, y: CY - 2, class: "donut-num" }); num.textContent = `${(cand.total / 1e6).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })} mi`;
+    const cap = svgEl("text", { x: CX, y: CY + 22, class: "donut-cap" }); cap.textContent = "de votos";
     svg.append(num, cap);
     card.append(svg);
 
+    card.append(el("p", "donut-cols", "Região · % dos votos do candidato · votos"));
     const list = el("ul", "donut-legend");
     rows.forEach((r) => {
       const li = el("li");
