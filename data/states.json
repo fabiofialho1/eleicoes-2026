@@ -1,0 +1,2647 @@
+{
+  "election": "006257",
+  "round": 1,
+  "fetchedAt": "2026-10-05T05:23:37.774Z",
+  "source": "https://resultados.tse.jus.br/oficial",
+  "brazil": {
+    "updatedAt": "05/10/2026 01:56:51",
+    "countedPct": 99.99,
+    "validVotes": 119300430,
+    "candidates": [
+      {
+        "number": "22",
+        "name": "FLAVIO BOLSONARO",
+        "party": "PL",
+        "votes": 56104500,
+        "pct": 47.03
+      },
+      {
+        "number": "13",
+        "name": "LULA",
+        "party": "PT",
+        "votes": 53879187,
+        "pct": 45.16
+      },
+      {
+        "number": "70",
+        "name": "ESCRITOR AUGUSTO CURY",
+        "party": "AVANTE",
+        "votes": 3448569,
+        "pct": 2.89
+      },
+      {
+        "number": "14",
+        "name": "RENAN SANTOS",
+        "party": "MISSÃO",
+        "votes": 2675886,
+        "pct": 2.24
+      },
+      {
+        "number": "55",
+        "name": "RONALDO CAIADO",
+        "party": "PSD",
+        "votes": 2605145,
+        "pct": 2.18
+      },
+      {
+        "number": "30",
+        "name": "ZEMA",
+        "party": "NOVO",
+        "votes": 326488,
+        "pct": 0.27
+      },
+      {
+        "number": "80",
+        "name": "SAMARA",
+        "party": "UP",
+        "votes": 122911,
+        "pct": 0.1
+      },
+      {
+        "number": "16",
+        "name": "HERTZ DIAS",
+        "party": "PSTU",
+        "votes": 43103,
+        "pct": 0.04
+      },
+      {
+        "number": "27",
+        "name": "CLARIANA BARAO",
+        "party": "DC",
+        "votes": 40043,
+        "pct": 0.03
+      },
+      {
+        "number": "21",
+        "name": "EDMILSON COSTA",
+        "party": "PCB",
+        "votes": 22693,
+        "pct": 0.02
+      },
+      {
+        "number": "35",
+        "name": "VETERINÁRIO WILSON GRASSI",
+        "party": "DEMOCRATA",
+        "votes": 16881,
+        "pct": 0.01
+      },
+      {
+        "number": "29",
+        "name": "RUI COSTA PIMENTA",
+        "party": "PCO",
+        "votes": 15024,
+        "pct": 0.01
+      }
+    ]
+  },
+  "states": {
+    "AC": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 469066,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 302807,
+          "pct": 64.56
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 134770,
+          "pct": 28.73
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 13523,
+          "pct": 2.88
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 8594,
+          "pct": 1.83
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 7980,
+          "pct": 1.7
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 573,
+          "pct": 0.12
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 314,
+          "pct": 0.07
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 215,
+          "pct": 0.05
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 140,
+          "pct": 0.03
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 71,
+          "pct": 0.02
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 40,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 39,
+          "pct": 0.01
+        }
+      ]
+    },
+    "AL": {
+      "updatedAt": "05/10/2026 01:57:05",
+      "countedPct": 100,
+      "validVotes": 1818856,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 995459,
+          "pct": 54.73
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 735718,
+          "pct": 40.45
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 42427,
+          "pct": 2.33
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 26851,
+          "pct": 1.48
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 14198,
+          "pct": 0.78
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1345,
+          "pct": 0.07
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1168,
+          "pct": 0.06
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 636,
+          "pct": 0.03
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 431,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 267,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 246,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 110,
+          "pct": 0.01
+        }
+      ]
+    },
+    "AM": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 99.99,
+      "validVotes": 2170405,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 1046645,
+          "pct": 48.22
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 976761,
+          "pct": 45
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 77531,
+          "pct": 3.57
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 35410,
+          "pct": 1.63
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 28307,
+          "pct": 1.3
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1867,
+          "pct": 0.09
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1781,
+          "pct": 0.08
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 929,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 457,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 291,
+          "pct": 0.01
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 265,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 161,
+          "pct": 0.01
+        }
+      ]
+    },
+    "AP": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 464858,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 212503,
+          "pct": 45.71
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 212278,
+          "pct": 45.67
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 19057,
+          "pct": 4.1
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 11342,
+          "pct": 2.44
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 8304,
+          "pct": 1.79
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 508,
+          "pct": 0.11
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 341,
+          "pct": 0.07
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 229,
+          "pct": 0.05
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 132,
+          "pct": 0.03
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 62,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 53,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 49,
+          "pct": 0.01
+        }
+      ]
+    },
+    "BA": {
+      "updatedAt": "05/10/2026 01:56:58",
+      "countedPct": 100,
+      "validVotes": 8560291,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 5664771,
+          "pct": 66.17
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 2442585,
+          "pct": 28.53
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 195451,
+          "pct": 2.28
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 122705,
+          "pct": 1.43
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 117518,
+          "pct": 1.37
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 6497,
+          "pct": 0.08
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 4649,
+          "pct": 0.05
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 1791,
+          "pct": 0.02
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 1676,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 1299,
+          "pct": 0.02
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 724,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 625,
+          "pct": 0.01
+        }
+      ]
+    },
+    "CE": {
+      "updatedAt": "05/10/2026 01:57:09",
+      "countedPct": 100,
+      "validVotes": 5617814,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 3555263,
+          "pct": 63.29
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 1756850,
+          "pct": 31.27
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 140524,
+          "pct": 2.5
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 107587,
+          "pct": 1.92
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 45604,
+          "pct": 0.81
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 4310,
+          "pct": 0.08
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 3352,
+          "pct": 0.06
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 1491,
+          "pct": 0.03
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 1071,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 783,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 498,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 481,
+          "pct": 0.01
+        }
+      ]
+    },
+    "DF": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 1772808,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 909616,
+          "pct": 51.31
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 675627,
+          "pct": 38.11
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 85076,
+          "pct": 4.8
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 46714,
+          "pct": 2.64
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 45979,
+          "pct": 2.59
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 4915,
+          "pct": 0.28
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 2297,
+          "pct": 0.13
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 828,
+          "pct": 0.05
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 716,
+          "pct": 0.04
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 382,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 334,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 324,
+          "pct": 0.02
+        }
+      ]
+    },
+    "ES": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 2251078,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 1233194,
+          "pct": 54.78
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 850028,
+          "pct": 37.76
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 65121,
+          "pct": 2.89
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 53236,
+          "pct": 2.36
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 39097,
+          "pct": 1.74
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 5873,
+          "pct": 0.26
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1973,
+          "pct": 0.09
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 974,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 638,
+          "pct": 0.03
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 388,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 311,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 245,
+          "pct": 0.01
+        }
+      ]
+    },
+    "GO": {
+      "updatedAt": "05/10/2026 01:57:08",
+      "countedPct": 100,
+      "validVotes": 3827823,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 2051888,
+          "pct": 53.6
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 1188880,
+          "pct": 31.06
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 472041,
+          "pct": 12.33
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 54105,
+          "pct": 1.41
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 53849,
+          "pct": 1.41
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 2672,
+          "pct": 0.07
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 2087,
+          "pct": 0.05
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 668,
+          "pct": 0.02
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 559,
+          "pct": 0.01
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 468,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 346,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 260,
+          "pct": 0.01
+        }
+      ]
+    },
+    "MA": {
+      "updatedAt": "05/10/2026 01:57:08",
+      "countedPct": 100,
+      "validVotes": 4010439,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 2566301,
+          "pct": 63.99
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 1239040,
+          "pct": 30.9
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 84830,
+          "pct": 2.12
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 60387,
+          "pct": 1.51
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 50155,
+          "pct": 1.25
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 4584,
+          "pct": 0.11
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1795,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 1459,
+          "pct": 0.04
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 895,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 475,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 307,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 211,
+          "pct": 0.01
+        }
+      ]
+    },
+    "MG": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 11976235,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 5777548,
+          "pct": 48.24
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 5188936,
+          "pct": 43.33
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 409737,
+          "pct": 3.42
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 247209,
+          "pct": 2.06
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 230423,
+          "pct": 1.92
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 98407,
+          "pct": 0.82
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 11026,
+          "pct": 0.09
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 4085,
+          "pct": 0.03
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 3411,
+          "pct": 0.03
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 2300,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 1732,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 1421,
+          "pct": 0.01
+        }
+      ]
+    },
+    "MS": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 1490278,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 873351,
+          "pct": 58.6
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 516855,
+          "pct": 34.68
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 39148,
+          "pct": 2.63
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 31847,
+          "pct": 2.14
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 23291,
+          "pct": 1.56
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 2792,
+          "pct": 0.19
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1291,
+          "pct": 0.09
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 626,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 353,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 332,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 209,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 183,
+          "pct": 0.01
+        }
+      ]
+    },
+    "MT": {
+      "updatedAt": "05/10/2026 01:57:06",
+      "countedPct": 100,
+      "validVotes": 1993288,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 1298581,
+          "pct": 65.15
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 581681,
+          "pct": 29.18
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 40019,
+          "pct": 2.01
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 33170,
+          "pct": 1.66
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 33079,
+          "pct": 1.66
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 2424,
+          "pct": 0.12
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 1869,
+          "pct": 0.09
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1584,
+          "pct": 0.08
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 340,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 239,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 172,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 130,
+          "pct": 0.01
+        }
+      ]
+    },
+    "PA": {
+      "updatedAt": "05/10/2026 01:57:10",
+      "countedPct": 100,
+      "validVotes": 4863172,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 2427237,
+          "pct": 49.91
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 2163957,
+          "pct": 44.5
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 125172,
+          "pct": 2.57
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 84165,
+          "pct": 1.73
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 51991,
+          "pct": 1.07
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 3824,
+          "pct": 0.08
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 3064,
+          "pct": 0.06
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 1293,
+          "pct": 0.03
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 1045,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 674,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 442,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 308,
+          "pct": 0.01
+        }
+      ]
+    },
+    "PB": {
+      "updatedAt": "05/10/2026 01:57:08",
+      "countedPct": 100,
+      "validVotes": 2513747,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 1541127,
+          "pct": 61.31
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 831377,
+          "pct": 33.07
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 73831,
+          "pct": 2.94
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 42247,
+          "pct": 1.68
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 19511,
+          "pct": 0.78
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1988,
+          "pct": 0.08
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1593,
+          "pct": 0.06
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 627,
+          "pct": 0.02
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 604,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 347,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 274,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 221,
+          "pct": 0.01
+        }
+      ]
+    },
+    "PE": {
+      "updatedAt": "05/10/2026 01:57:07",
+      "countedPct": 100,
+      "validVotes": 5601017,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 3553971,
+          "pct": 63.45
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 1738043,
+          "pct": 31.03
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 137960,
+          "pct": 2.46
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 85865,
+          "pct": 1.53
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 73176,
+          "pct": 1.31
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 6060,
+          "pct": 0.11
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 2387,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 1114,
+          "pct": 0.02
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 869,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 705,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 457,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 410,
+          "pct": 0.01
+        }
+      ]
+    },
+    "PI": {
+      "updatedAt": "05/10/2026 01:57:08",
+      "countedPct": 100,
+      "validVotes": 2146394,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 1523710,
+          "pct": 70.99
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 517028,
+          "pct": 24.09
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 47692,
+          "pct": 2.22
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 32274,
+          "pct": 1.5
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 21629,
+          "pct": 1.01
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1357,
+          "pct": 0.06
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1099,
+          "pct": 0.05
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 504,
+          "pct": 0.02
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 443,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 319,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 193,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 146,
+          "pct": 0.01
+        }
+      ]
+    },
+    "PR": {
+      "updatedAt": "05/10/2026 01:56:53",
+      "countedPct": 100,
+      "validVotes": 6585243,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 3945345,
+          "pct": 59.91
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 2054597,
+          "pct": 31.2
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 205095,
+          "pct": 3.11
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 177434,
+          "pct": 2.69
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 171294,
+          "pct": 2.6
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 17172,
+          "pct": 0.26
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 6731,
+          "pct": 0.1
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 2445,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 2056,
+          "pct": 0.03
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 1195,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 962,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 917,
+          "pct": 0.01
+        }
+      ]
+    },
+    "RJ": {
+      "updatedAt": "05/10/2026 01:57:07",
+      "countedPct": 100,
+      "validVotes": 9369700,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 4966844,
+          "pct": 53.01
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 3693021,
+          "pct": 39.41
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 247397,
+          "pct": 2.64
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 211843,
+          "pct": 2.26
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 199844,
+          "pct": 2.13
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 21907,
+          "pct": 0.23
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 14186,
+          "pct": 0.15
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 4082,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 3999,
+          "pct": 0.04
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 2854,
+          "pct": 0.03
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 1930,
+          "pct": 0.02
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 1793,
+          "pct": 0.02
+        }
+      ]
+    },
+    "RN": {
+      "updatedAt": "05/10/2026 01:57:07",
+      "countedPct": 100,
+      "validVotes": 2071898,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 1237963,
+          "pct": 59.75
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 720493,
+          "pct": 34.77
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 57367,
+          "pct": 2.77
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 35261,
+          "pct": 1.7
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 16407,
+          "pct": 0.79
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1525,
+          "pct": 0.07
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1228,
+          "pct": 0.06
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 572,
+          "pct": 0.03
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 405,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 315,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 185,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 177,
+          "pct": 0.01
+        }
+      ]
+    },
+    "RO": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 968059,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 652988,
+          "pct": 67.45
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 250667,
+          "pct": 25.89
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 25280,
+          "pct": 2.61
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 19187,
+          "pct": 1.98
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 16929,
+          "pct": 1.75
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1318,
+          "pct": 0.14
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 843,
+          "pct": 0.09
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 356,
+          "pct": 0.04
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 174,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 160,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 97,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 60,
+          "pct": 0.01
+        }
+      ]
+    },
+    "RR": {
+      "updatedAt": "05/10/2026 01:57:04",
+      "countedPct": 100,
+      "validVotes": 325545,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 231322,
+          "pct": 71.06
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 74420,
+          "pct": 22.86
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 8579,
+          "pct": 2.64
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 6623,
+          "pct": 2.03
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 3639,
+          "pct": 1.12
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 337,
+          "pct": 0.1
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 280,
+          "pct": 0.09
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 168,
+          "pct": 0.05
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 60,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 42,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 41,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 34,
+          "pct": 0.01
+        }
+      ]
+    },
+    "RS": {
+      "updatedAt": "05/10/2026 01:56:54",
+      "countedPct": 100,
+      "validVotes": 6423046,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 3573783,
+          "pct": 55.64
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 2294759,
+          "pct": 35.73
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 195296,
+          "pct": 3.04
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 167558,
+          "pct": 2.61
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 158821,
+          "pct": 2.47
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 18988,
+          "pct": 0.3
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 6632,
+          "pct": 0.1
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 2146,
+          "pct": 0.03
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 2066,
+          "pct": 0.03
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 1043,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 1031,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 923,
+          "pct": 0.01
+        }
+      ]
+    },
+    "SC": {
+      "updatedAt": "05/10/2026 01:57:10",
+      "countedPct": 100,
+      "validVotes": 4500897,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 3000020,
+          "pct": 66.65
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 1127168,
+          "pct": 25.04
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 134273,
+          "pct": 2.98
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 132795,
+          "pct": 2.95
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 79911,
+          "pct": 1.78
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 16718,
+          "pct": 0.37
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 5049,
+          "pct": 0.11
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 1503,
+          "pct": 0.03
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 1429,
+          "pct": 0.03
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 828,
+          "pct": 0.02
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 643,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 560,
+          "pct": 0.01
+        }
+      ]
+    },
+    "SE": {
+      "updatedAt": "05/10/2026 01:57:05",
+      "countedPct": 100,
+      "validVotes": 1364196,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 856019,
+          "pct": 62.75
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 417839,
+          "pct": 30.63
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 38895,
+          "pct": 2.85
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 26651,
+          "pct": 1.95
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 21405,
+          "pct": 1.57
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 1158,
+          "pct": 0.08
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 991,
+          "pct": 0.07
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 457,
+          "pct": 0.03
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 331,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 204,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 138,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 108,
+          "pct": 0.01
+        }
+      ]
+    },
+    "SP": {
+      "updatedAt": "05/10/2026 01:57:02",
+      "countedPct": 100,
+      "validVotes": 24882948,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 12922023,
+          "pct": 51.93
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 9505413,
+          "pct": 38.2
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 892368,
+          "pct": 3.59
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 804310,
+          "pct": 3.23
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 579571,
+          "pct": 2.33
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 94635,
+          "pct": 0.38
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 42532,
+          "pct": 0.17
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 15815,
+          "pct": 0.06
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 10563,
+          "pct": 0.04
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 6129,
+          "pct": 0.02
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 5160,
+          "pct": 0.02
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 4429,
+          "pct": 0.02
+        }
+      ]
+    },
+    "TO": {
+      "updatedAt": "05/10/2026 01:57:05",
+      "countedPct": 100,
+      "validVotes": 930447,
+      "candidates": [
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 469321,
+          "pct": 50.44
+        },
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 404009,
+          "pct": 43.42
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 22434,
+          "pct": 2.41
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 20189,
+          "pct": 2.17
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 12983,
+          "pct": 1.4
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 595,
+          "pct": 0.06
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 395,
+          "pct": 0.04
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 171,
+          "pct": 0.02
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 117,
+          "pct": 0.01
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 101,
+          "pct": 0.01
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 67,
+          "pct": 0.01
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 65,
+          "pct": 0.01
+        }
+      ]
+    },
+    "ZZ": {
+      "updatedAt": "05/10/2026 01:57:06",
+      "countedPct": 100,
+      "validVotes": 330882,
+      "candidates": [
+        {
+          "number": "13",
+          "name": "LULA",
+          "party": "PT",
+          "votes": 157387,
+          "pct": 47.57
+        },
+        {
+          "number": "22",
+          "name": "FLAVIO BOLSONARO",
+          "party": "PL",
+          "votes": 143900,
+          "pct": 43.49
+        },
+        {
+          "number": "70",
+          "name": "ESCRITOR AUGUSTO CURY",
+          "party": "AVANTE",
+          "votes": 9734,
+          "pct": 2.94
+        },
+        {
+          "number": "14",
+          "name": "RENAN SANTOS",
+          "party": "MISSÃO",
+          "votes": 8580,
+          "pct": 2.59
+        },
+        {
+          "number": "55",
+          "name": "RONALDO CAIADO",
+          "party": "PSD",
+          "votes": 4708,
+          "pct": 1.42
+        },
+        {
+          "number": "30",
+          "name": "ZEMA",
+          "party": "NOVO",
+          "votes": 3329,
+          "pct": 1.01
+        },
+        {
+          "number": "80",
+          "name": "SAMARA",
+          "party": "UP",
+          "votes": 1053,
+          "pct": 0.32
+        },
+        {
+          "number": "27",
+          "name": "CLARIANA BARAO",
+          "party": "DC",
+          "votes": 825,
+          "pct": 0.25
+        },
+        {
+          "number": "21",
+          "name": "EDMILSON COSTA",
+          "party": "PCB",
+          "votes": 421,
+          "pct": 0.13
+        },
+        {
+          "number": "16",
+          "name": "HERTZ DIAS",
+          "party": "PSTU",
+          "votes": 373,
+          "pct": 0.11
+        },
+        {
+          "number": "35",
+          "name": "VETERINÁRIO WILSON GRASSI",
+          "party": "DEMOCRATA",
+          "votes": 373,
+          "pct": 0.11
+        },
+        {
+          "number": "29",
+          "name": "RUI COSTA PIMENTA",
+          "party": "PCO",
+          "votes": 199,
+          "pct": 0.06
+        }
+      ]
+    }
+  }
+}
