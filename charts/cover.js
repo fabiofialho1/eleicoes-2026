@@ -14,7 +14,7 @@ const svgEl = (tag, attrs = {}) => {
 const BG = [246, 247, 250];
 const CAND_RGB = [[42, 120, 214], [235, 104, 52]];
 const REGION_HEX = { southeast: "#4a3aa7", northeast: "#1baf7a", south: "#eda100", north: "#e87ba4", "central-west": "#008300" };
-const REGION_DARK_TEXT = ["south", "north", "northeast"]; // light segments get dark numbers
+const REGION_DARK_TEXT = ["north-northeast"]; // light segments (the aqua one) get dark numbers
 const lerp = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
 const BASE_AT = 0.6;
 function ramp(rgb, pos) { // light -> candidate color -> deeper shade, same ramp as the maps
@@ -128,9 +128,15 @@ export function renderCover(root, data) {
 
   // ---- regions: one stacked bar per candidate. Bar length = the candidate's result in Brazil; each segment = percentage
   // points that one region adds to it (same axis for both bars, same color per region).
-  cv.append(el("div", "cv-rgtitle", "De onde vem o resultado de cada candidato, por região"));
+  cv.append(el("div", "cv-rgtitle", "De onde vem o resultado de cada candidato, por grupo de regiões"));
   const validTotal = F.validTotal;
-  const regs = REGIONS.map((r) => ({ ...r, valid: r.ufs.reduce((a, u) => a + data.states[u].validVotes, 0) })).sort((a, b) => b.valid - a.valid);
+  // Grouped regions (a reading choice, not an IBGE division): each group keeps the color of its largest region.
+  const ufsOf = (ids) => ids.flatMap((id) => REGIONS.find((r) => r.id === id).ufs);
+  const regs = [
+    { id: "south-southeast", label: "Sul + Sudeste", ufs: ufsOf(["south", "southeast"]), hex: REGION_HEX.southeast },
+    { id: "north-northeast", label: "Norte + Nordeste", ufs: ufsOf(["north", "northeast"]), hex: REGION_HEX.northeast },
+    { id: "central-west", label: "Centro-Oeste", ufs: ufsOf(["central-west"]), hex: REGION_HEX["central-west"] },
+  ].map((g) => ({ ...g, valid: g.ufs.reduce((a, u) => a + data.states[u].validVotes, 0) })).sort((a, b) => b.valid - a.valid);
   const axisMax = Math.max(F.natPct, L.natPct) * 1.02; // the totals sit under the names, so the bars can use the whole track
   const rbars = el("div", "cv-rbars");
   cands.forEach((c, i) => {
@@ -145,8 +151,8 @@ export function renderCover(root, data) {
     const pps = regs.map((r) => r.ufs.reduce((a, u) => a + c.byUf[u].natPct, 0));
     bar.style.width = `${(pps.reduce((a, b) => a + b, 0) / axisMax) * 100}%`;
     regs.forEach((r, k) => {
-      const seg = el("div", r.id === "northeast" ? "cv-rseg cv-ne-seg" : "cv-rseg");
-      seg.style.flexGrow = pps[k]; seg.style.background = REGION_HEX[r.id];
+      const seg = el("div", "cv-rseg");
+      seg.style.flexGrow = pps[k]; seg.style.background = r.hex;
       {
         const t = el("span", null, pps[k].toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }));
         t.style.color = REGION_DARK_TEXT.includes(r.id) ? "#0b0b0b" : "#ffffff";
@@ -161,13 +167,24 @@ export function renderCover(root, data) {
   cv.append(rbars);
   const rlegend = el("div", "cv-rlegend");
   regs.forEach((r) => {
-    const item = el("span", r.id === "northeast" ? "cv-ne-item" : "");
-    const sw = el("i"); sw.style.background = REGION_HEX[r.id];
+    const item = el("span");
+    const sw = el("i"); sw.style.background = r.hex;
     item.append(sw, document.createTextNode(r.label));
     rlegend.append(item);
   });
   cv.append(rlegend);
-  cv.append(el("div", "cv-rnote", `Pontos percentuais dos votos válidos do Brasil. Cada barra soma o resultado do candidato, com o exterior (${num2(F.byUf.ZZ.natPct)} e ${num2(L.byUf.ZZ.natPct)}), que não cabe na barra.`));
+  // Balance of each group (Flávio minus Lula, in votes): the claim in the sentence depends on the data, so it is conditional.
+  const saldo = regs.map((r) => r.ufs.reduce((a, u) => a + F.byUf[u].votes - L.byUf[u].votes, 0));
+  const total = saldo.reduce((a, b) => a + b, 0) + (F.byUf.ZZ.votes - L.byUf.ZZ.votes);
+  const big = regs.findIndex((r) => r.id === "south-southeast"), nne = regs.findIndex((r) => r.id === "north-northeast"), cw = regs.findIndex((r) => r.id === "central-west");
+  const k = (n) => Math.abs(n).toLocaleString("pt-BR");
+  const who = (n) => (n >= 0 ? F.short : L.short);
+  let balance = `Saldo: Sul + Sudeste ${who(saldo[big])} +${k(saldo[big])}, Norte + Nordeste ${who(saldo[nne])} +${k(saldo[nne])}, Centro-Oeste ${who(saldo[cw])} +${k(saldo[cw])}.`;
+  if (total && Math.abs(saldo[big] + saldo[nne]) < 0.2 * Math.abs(total)) {
+    balance = `Sul + Sudeste e Norte + Nordeste quase se anulam (${k(saldo[big] + saldo[nne])} votos). O Centro-Oeste (${who(saldo[cw])} +${k(saldo[cw])}) é ${fmtPct((saldo[cw] / total) * 100)} da diferença nacional de ${k(total)} votos.`;
+  }
+  cv.append(el("div", "cv-rbalance", balance));
+  cv.append(el("div", "cv-rnote", `Pontos percentuais dos votos válidos do Brasil. O exterior (${num2(F.byUf.ZZ.natPct)} e ${num2(L.byUf.ZZ.natPct)}) não cabe na barra. Grupos: escolha de leitura.`));
 
   const close = el("div", "cv-close");
   close.append(el("p", null, "Antes de destilar preconceito com o Nordeste, vamos interpretar os dados direto."));
