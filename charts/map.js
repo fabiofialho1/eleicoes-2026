@@ -44,6 +44,18 @@ function clipLeft(ring, cut) { // Sutherland-Hodgman against the half-plane x <=
   });
   return out;
 }
+function centroidSide(d, cut, side) { // area-weighted centroid of the part left (side -1) or right (side 1) of x = cut
+  let A = 0, X = 0, Y = 0;
+  ringsOf(d).forEach((ring) => {
+    const part = side < 0 ? clipLeft(ring, cut) : clipLeft(ring.map(([x, y]) => [-x, y]), -cut).map(([x, y]) => [-x, y]);
+    if (part.length < 3) return;
+    let a2 = 0, cx = 0, cy = 0;
+    part.forEach(([x, y], i) => { const [x2, y2] = part[(i + 1) % part.length]; const c = x * y2 - x2 * y; a2 += c; cx += (x + x2) * c; cy += (y + y2) * c; });
+    if (!a2) return;
+    A += Math.abs(a2); X += (cx / (3 * a2)) * Math.abs(a2); Y += (cy / (3 * a2)) * Math.abs(a2);
+  });
+  return A ? { x: X / A, y: Y / A } : null;
+}
 function splitCut(d, frac) { // x position where the area to the left is `frac` of the state's area
   const rings = ringsOf(d);
   const total = rings.reduce((s, r) => s + ringArea(r), 0);
@@ -127,19 +139,27 @@ function render(root, data) {
     return bbox[uf];
   }
   // With `cand`, states that add 2% or more and are big enough also show their percentage; smaller ones rely on tap and the table.
-  function addLabels(svg, cand) {
+  // With `halves` (the combined map), wide states show each candidate's percentage inside that candidate's half.
+  function addLabels(svg, cand, halves) {
     const labels = svgEl("g", { "pointer-events": "none" });
+    const put = (x, y, text, extra) => {
+      const t = svgEl("text", { x, y, class: extra ? `map-label ${extra}` : "map-label" });
+      t.textContent = text;
+      labels.append(t);
+    };
     ufs.forEach((uf) => {
       const { cx, cy } = MAP.states[uf];
-      const showValue = cand && cand.byUf[uf].natPct >= 2 && box(uf).w >= 95 && box(uf).h >= 65;
-      const t = svgEl("text", { x: cx, y: showValue ? cy - 12 : cy, class: "map-label" });
-      t.textContent = uf;
-      labels.append(t);
-      if (showValue) {
-        const v = svgEl("text", { x: cx, y: cy + 12, class: "map-label map-value" });
-        v.textContent = fmtPct(cand.byUf[uf].natPct, 1);
-        labels.append(v);
+      const h = halves && halves[uf];
+      if (halves && halves.GO && uf === "DF") return; // DF is a dot inside GO: its code would sit on top of GO's number
+      const showValue = !halves && cand && cand.byUf[uf].natPct >= 2 && box(uf).w >= 95 && box(uf).h >= 65;
+      if (h) {
+        // State code above both numbers, on the dividing line; each number inside its candidate's half.
+        put(h.cut, Math.min(...h.parts.map((p) => p.y)) - 14, uf);
+        h.parts.forEach((p) => put(p.x, p.y + 12, p.text, "map-value"));
+        return;
       }
+      put(cx, showValue ? cy - 13 : cy, uf);
+      if (showValue) put(cx, cy + 12, fmtPct(cand.byUf[uf].natPct, 1), "map-value");
     });
     svg.append(labels);
   }
@@ -150,12 +170,13 @@ function render(root, data) {
     const a = cands[0], b = cands[1];
     const { card, svg } = mapCard({
       title: [el("h3", null, "Os dois candidatos")],
-      meta: `Cada estado é dividido entre ${a.short} (esquerda) e ${b.short} (direita) em proporção aos votos de cada um nele. A intensidade de cada parte segue a contribuição do candidato ao total nacional.`,
+      meta: `Cada estado é dividido entre ${a.short} (esquerda) e ${b.short} (direita) em proporção aos votos de cada um nele. A intensidade de cada parte segue a contribuição do candidato ao total nacional, e os números mostram essa contribuição nos estados maiores.`,
       wide: true,
     });
     svg.setAttribute("aria-label", "Mapa dos dois candidatos, cada estado dividido em proporção aos votos");
     const defs = svgEl("defs");
     const fills = svgEl("g"), hits = svgEl("g");
+    const halves = {};
     ufs.forEach((uf) => {
       const st = MAP.states[uf];
       const va = a.byUf[uf].votes, vb = b.byUf[uf].votes;
@@ -163,6 +184,10 @@ function render(root, data) {
       const mk = (id, x, w) => { const cp = svgEl("clipPath", { id }); cp.append(svgEl("rect", { x, y: 0, width: w, height: MAP.height })); defs.append(cp); };
       mk(`cl-${uf}`, minX - 2, cut - minX + 2);
       mk(`cr-${uf}`, cut, maxX - cut + 2);
+      if (box(uf).w >= 140 && box(uf).h >= 65) {
+        const l = centroidSide(st.d, cut, -1), r = centroidSide(st.d, cut, 1);
+        if (l && r && cut - minX >= 62 && maxX - cut >= 62) halves[uf] = { cut, parts: [{ ...l, text: fmtPct(a.byUf[uf].natPct, 1) }, { ...r, text: fmtPct(b.byUf[uf].natPct, 1) }] };
+      }
       const left = svgEl("path", { d: st.d, "clip-path": `url(#cl-${uf})` });
       const right = svgEl("path", { d: st.d, "clip-path": `url(#cr-${uf})` });
       fills.append(left, right);
@@ -173,7 +198,7 @@ function render(root, data) {
       addHit(hits, uf, ariaFor(uf));
     });
     svg.append(defs, fills, hits);
-    addLabels(svg);
+    addLabels(svg, null, halves);
     const legends = el("div", "legend-pair");
     cands.forEach((c) => {
       const item = el("div", "legend-item");
