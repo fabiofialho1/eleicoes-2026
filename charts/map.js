@@ -1,4 +1,4 @@
-import { el, ufName, fmtInt, fmtPct, topCandidates, tableView } from "./shared.js";
+import { el, ufName, fmtInt, fmtPct, topCandidates, tableView, rampColor, watchTheme } from "./shared.js";
 import { MAP } from "./brazil-map.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -8,28 +8,11 @@ const svgEl = (tag, attrs = {}) => {
   return e;
 };
 
-// ---- Colors, computed here (not with CSS color-mix, which older Android browsers ignore, leaving the shapes black).
 // Contribution = % of ALL valid votes in Brazil that a candidate gets from one state. Each state is colored with a
 // continuous gradient of the candidate's own hue (light = small contribution, intense = large), on one scale shared
 // by every map. The scale follows the square root of the share, so small states stay distinguishable next to São Paulo.
-const rootStyle = () => getComputedStyle(document.documentElement);
-function token(name) {
-  const v = rootStyle().getPropertyValue(name).trim();
-  const m = v.match(/^#([0-9a-f]{6})$/i);
-  return m ? [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16)) : [128, 128, 128];
-}
 const position = (share, max) => Math.sqrt(Math.max(0, share) / max); // 0..1 along the gradient
-// Two-part ramp: surface -> candidate color (first 60% of the scale), then candidate color -> a deeper shade of it
-// (darker on a light page, lighter on a dark page). The wide range makes neighbouring states easier to tell apart.
-const BASE_AT = 0.6;
-const lerp = (from, to, t) => from.map((c, i) => c + (to[i] - c) * t);
-const luminance = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
-function mixColor(cand, pos) {
-  const fg = token(cand.token), bg = token("--surface-1");
-  const deep = lerp(fg, luminance(bg) < 0.35 ? [255, 255, 255] : [0, 0, 0], 0.5);
-  const rgb = pos <= BASE_AT ? lerp(bg, fg, 0.05 + 0.95 * (pos / BASE_AT)) : lerp(fg, deep, (pos - BASE_AT) / (1 - BASE_AT));
-  return `rgb(${rgb.map(Math.round).join(",")})`;
-}
+const mixColor = rampColor;
 
 // ---- Geometry helpers: split a state into two parts whose AREAS match given proportions.
 const ringsOf = (d) => d.split("M").filter(Boolean).map((seg) => seg.replace("Z", "").split("L").map((p) => p.split(" ").map(Number)));
@@ -73,7 +56,6 @@ const TICKS = [0, 1, 2, 4]; // plus the maximum, drawn at the right end
 
 function render(root, data) {
   const cands = topCandidates(data);
-  cands.forEach((c, i) => (c.token = `--series-${i + 1}`));
   const ufs = Object.keys(MAP.states);
   const abroad = cands.map((c) => c.byUf.ZZ);
   const max = Math.max(...cands.flatMap((c) => ufs.map((uf) => c.byUf[uf].natPct))); // one scale for every map
@@ -259,10 +241,7 @@ function render(root, data) {
   select([...ufs].sort((x, y) => cands[0].byUf[y].votes - cands[0].byUf[x].votes)[0]);
 
   // Paint now, and again whenever the theme changes.
-  const paint = () => recolor.forEach((fn) => fn());
-  paint();
-  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", paint);
-  new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  watchTheme(() => recolor.forEach((fn) => fn()));
 
   root.append(el("p", "chart-lead",
     `O exterior não aparece nos mapas. Ele soma ${fmtPct(abroad[0].natPct, 2)} para ${cands[0].short} e ${fmtPct(abroad[1].natPct, 2)} para ${cands[1].short}.`));

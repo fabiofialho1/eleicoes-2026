@@ -38,7 +38,7 @@ export function topCandidates(data, n = 2) {
     }));
     const total = Object.values(byUf).reduce((a, v) => a + v.votes, 0);
     return {
-      number: c.number, name, short: name.split(" ")[0], party: c.party, color: `var(--series-${i + 1})`,
+      number: c.number, name, short: name.split(" ")[0], party: c.party, color: `var(--series-${i + 1})`, token: `--series-${i + 1}`,
       byUf, total, natPct: (total / validTotal) * 100, validTotal,
     };
   });
@@ -130,4 +130,39 @@ export function percentAxis(axisMax, step = 5) {
   }
   grid.append(el("div", "axis0"));
   return grid;
+}
+
+// ---- Regions (IBGE). Labels are looked up here; data only carries UF ids.
+// Each region has its own color (--region-N in site.css), the same in every chart, so rings can be compared.
+export const REGIONS = [
+  { id: "north", label: "Norte", color: "--region-4", ufs: ["AC", "AM", "AP", "PA", "RO", "RR", "TO"] },
+  { id: "northeast", label: "Nordeste", color: "--region-2", ufs: ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"] },
+  { id: "central-west", label: "Centro-Oeste", color: "--region-5", ufs: ["DF", "GO", "MS", "MT"] },
+  { id: "southeast", label: "Sudeste", color: "--region-1", ufs: ["ES", "MG", "RJ", "SP"] },
+  { id: "south", label: "Sul", color: "--region-3", ufs: ["PR", "RS", "SC"] },
+];
+
+// ---- Colors computed in JS (CSS color-mix is ignored by older Android browsers, which leaves SVG shapes black).
+export function token(name) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const m = v.match(/^#([0-9a-f]{6})$/i);
+  return m ? [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16)) : [128, 128, 128];
+}
+const lerp = (from, to, t) => from.map((c, i) => c + (to[i] - c) * t);
+const luminance = ([r, g, b]) => (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+// Ramp for a candidate: surface -> candidate color (first 60% of the scale), then a deeper shade
+// (darker on a light page, lighter on a dark page). `pos` goes from 0 to 1. Returns [r, g, b].
+const BASE_AT = 0.6;
+export function rampRgb(cand, pos) {
+  const fg = token(cand.token), bg = token("--surface-1");
+  const deep = lerp(fg, luminance(bg) < 0.35 ? [255, 255, 255] : [0, 0, 0], 0.5);
+  return (pos <= BASE_AT ? lerp(bg, fg, 0.05 + 0.95 * (pos / BASE_AT)) : lerp(fg, deep, (pos - BASE_AT) / (1 - BASE_AT))).map(Math.round);
+}
+export const rampColor = (cand, pos) => `rgb(${rampRgb(cand, pos).join(",")})`;
+export { luminance };
+// Runs `paint` now and whenever the theme changes (OS setting or the page's data-theme).
+export function watchTheme(paint) {
+  paint();
+  matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", paint);
+  new MutationObserver(paint).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 }
