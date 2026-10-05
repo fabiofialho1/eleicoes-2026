@@ -16,7 +16,7 @@
     --axis: #c3c2b7;
     --series-1: #2a78d6;
     --series-2: #eb6834;
-    --namew: 138px;
+    --namew: 152px;
   }
   @media (prefers-color-scheme: dark) {
     :root:where(:not([data-theme="light"])) {
@@ -59,9 +59,6 @@
   .legend span { display: inline-flex; align-items: center; gap: 8px; }
   .swatch { width: 12px; height: 12px; border-radius: 3px; background: var(--c); }
 
-  .panels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  @media (max-width: 760px) { .panels { grid-template-columns: 1fr; } }
-  @media (max-width: 480px) { :root { --namew: 118px; } .row .name { font-size: 12px; } }
   .panel { background: var(--surface-1); border-radius: 12px; padding: 16px 16px 12px; border: 1px solid var(--grid); }
   .panel h2 { font-size: 16px; margin: 0; font-weight: 650; }
   .panel .meta { margin: 2px 0 12px; font-size: 13px; color: var(--text-secondary); }
@@ -73,19 +70,13 @@
   .tick0 { transform: none; }
   .axis0 { position: absolute; top: 0; bottom: 22px; left: 0; width: 1px; background: var(--axis); }
 
-  .row { display: grid; grid-template-columns: var(--namew) 1fr; align-items: center; height: 30px; position: relative; }
+  .row { display: grid; grid-template-columns: var(--namew) 1fr; align-items: center; height: 32px; position: relative; border-radius: 6px; outline: none; }
+  .row:hover, .row:focus-visible { background: color-mix(in srgb, var(--grid) 55%, transparent); }
   .row .name { font-size: 13px; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 8px; }
-  .track { position: relative; height: 100%; display: flex; align-items: center; }
-  .bar {
-    height: 20px;
-    background: var(--c);
-    border-radius: 0 4px 4px 0;
-    min-width: 2px;
-    outline: none;
-    transition: filter .12s;
-  }
-  .bar:hover, .bar:focus-visible { filter: brightness(1.12); box-shadow: 0 0 0 2px var(--surface-1), 0 0 0 4px var(--c); }
-  .val { margin-left: 4px; padding: 0 4px; background: var(--surface-1); font-size: 13px; font-weight: 600; color: var(--text-primary); white-space: nowrap; }
+  .track { display: flex; flex-direction: column; gap: 2px; justify-content: center; height: 100%; }
+  .barline { display: flex; align-items: center; height: 11px; }
+  .bar { height: 11px; background: var(--c); border-radius: 0 4px 4px 0; min-width: 2px; }
+  .val { margin-left: 4px; padding: 0 4px; background: var(--surface-1); font-size: 11px; font-weight: 600; color: var(--text-primary); white-space: nowrap; line-height: 11px; }
   .plotgrid { position: absolute; inset: 0 0 0 var(--namew); pointer-events: none; }
 
   .summary { margin: 12px 0 0; font-size: 13px; color: var(--text-secondary); }
@@ -105,21 +96,24 @@
     position: fixed; z-index: 10; pointer-events: none; opacity: 0; transition: opacity .1s;
     background: var(--surface-1); color: var(--text-primary);
     border: 1px solid var(--axis); border-radius: 8px; padding: 8px 10px; font-size: 12px;
-    box-shadow: 0 4px 16px rgba(0,0,0,.18); max-width: 240px;
+    box-shadow: 0 4px 16px rgba(0,0,0,.18); max-width: 360px;
   }
   #tip .t-title { color: var(--text-secondary); margin-bottom: 4px; display: flex; align-items: center; gap: 6px; }
   #tip .t-key { width: 10px; height: 2px; background: var(--c); display: inline-block; }
-  #tip .t-line { display: flex; justify-content: space-between; gap: 16px; }
+  #tip .t-line { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+  #tip .t-line .who { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+  #tip .t-line, #tip .t-title { white-space: nowrap; }
+  #tip .t-sep { border-top: 1px solid var(--grid); margin: 6px 0 4px; }
   #tip .t-line b { font-size: 14px; }
   #err { color: #d03b3b; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>Quais estados mais contribuem com os votos de cada candidato</h1>
+  <h1>Quanto cada estado contribui para os votos de cada candidato</h1>
   <p class="sub" id="sub">Carregando…</p>
   <div class="legend" id="legend" aria-label="Legenda"></div>
-  <div class="panels" id="panels"></div>
+  <div id="panels"></div>
   <details>
     <summary>Ver tabela com todas as UFs</summary>
     <div class="tablewrap"><table id="table"></table></div>
@@ -139,7 +133,6 @@ const UF_NAMES = {
   SC: "Santa Catarina", SE: "Sergipe", SP: "São Paulo", TO: "Tocantins", ZZ: "Exterior",
 };
 const DISPLAY_NAMES = { "22": "Flávio Bolsonaro", "13": "Lula" };
-const TOP_N = 10;
 
 const fmtInt = new Intl.NumberFormat("pt-BR");
 const fmtPct = (x) => x.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + "%";
@@ -153,29 +146,36 @@ function el(tag, cls, text) {
   return e;
 }
 
-function showTip(ev, cand, row) {
+function showTip(ev, state) {
   tip.replaceChildren();
-  const title = el("div", "t-title");
-  const key = el("span", "t-key");
-  key.style.setProperty("--c", cand.color);
-  title.append(key, document.createTextNode(`${UF_NAMES[row.uf] ?? row.uf} · ${cand.name}`));
-  const l1 = el("div", "t-line"); l1.append(el("span", null, "Votos"), el("b", null, fmtInt.format(row.votes)));
-  const l2 = el("div", "t-line"); l2.append(el("span", null, "% do total do candidato"), el("b", null, fmtPct(row.share)));
-  const l3 = el("div", "t-line"); l3.append(el("span", null, "Posição"), el("b", null, `${row.rank}º`));
-  tip.append(title, l1, l2, l3);
+  tip.append(el("div", "t-title", `${UF_NAMES[state.uf] ?? state.uf} · ${state.rank}º em votos de ${state.leaderName}`));
+  state.cells.forEach((c) => {
+    const line = el("div", "t-line");
+    const who = el("span", "who");
+    const key = el("span", "t-key"); key.style.setProperty("--c", c.cand.color);
+    who.append(key, document.createTextNode(c.cand.name));
+    const val = el("span"); val.append(el("b", null, fmtPct(c.share)), document.createTextNode(` · ${fmtInt.format(c.votes)} votos`));
+    line.append(who, val);
+    tip.append(line);
+  });
+  const diff = state.cells[0].votes - state.cells[1].votes;
+  tip.append(el("div", "t-sep"));
+  const dl = el("div", "t-line");
+  dl.append(el("span", null, `Saldo ${state.cells[0].cand.short} − ${state.cells[1].cand.short}`), el("b", null, (diff > 0 ? "+" : diff < 0 ? "−" : "") + fmtInt.format(Math.abs(diff))));
+  tip.append(dl);
   tip.style.opacity = 1;
   const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight;
   let x = ev.clientX + pad, y = ev.clientY + pad;
   if (x + w > innerWidth - 8) x = ev.clientX - w - pad;
   if (y + h > innerHeight - 8) y = ev.clientY - h - pad;
-  tip.style.left = x + "px"; tip.style.top = y + "px";
+  tip.style.left = Math.max(8, x) + "px"; tip.style.top = Math.max(8, y) + "px";
 }
 const hideTip = () => { tip.style.opacity = 0; };
 
-function renderPanel(cand, axisMax) {
+function renderChart(cands, states, axisMax) {
   const panel = el("section", "panel");
-  panel.append(el("h2", null, cand.name));
-  panel.append(el("p", "meta", `${fmtInt.format(cand.total)} votos no total · ${cand.topSum.toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% vêm dos 10 estados abaixo`));
+  panel.append(el("h2", null, `Contribuição de cada estado para o total de votos (ordem: ${cands[0].name})`));
+  panel.append(el("p", "meta", "Cada barra = votos do candidato no estado ÷ votos do candidato no país."));
   const plot = el("div", "plot");
   const rows = el("div", "rows");
   const grid = el("div", "plotgrid");
@@ -185,27 +185,29 @@ function renderPanel(cand, axisMax) {
     const tk = el("div", t === 0 ? "tick tick0" : "tick", t + "%"); tk.style.left = left; grid.append(tk);
   }
   const base = el("div", "axis0"); base.style.left = "0"; grid.append(base);
-  for (const r of cand.top) {
+
+  states.forEach((st, i) => {
     const row = el("div", "row");
-    row.append(el("div", "name", UF_NAMES[r.uf] ?? r.uf));
+    row.tabIndex = 0;
+    row.setAttribute("aria-label", `${UF_NAMES[st.uf] ?? st.uf}: ` + st.cells.map((c) => `${c.cand.name} ${fmtPct(c.share)}`).join(", "));
+    row.append(el("div", "name", UF_NAMES[st.uf] ?? st.uf));
     const track = el("div", "track");
-    const bar = el("div", "bar");
-    bar.style.setProperty("--c", cand.color);
-    bar.style.width = `${(r.share / axisMax) * 100}%`;
-    bar.style.minWidth = "2px";
-    bar.tabIndex = 0;
-    bar.setAttribute("aria-label", `${UF_NAMES[r.uf] ?? r.uf}: ${fmtPct(r.share)} dos votos de ${cand.name} (${fmtInt.format(r.votes)} votos)`);
-    bar.addEventListener("pointermove", (ev) => showTip(ev, cand, r));
-    bar.addEventListener("pointerleave", hideTip);
-    bar.addEventListener("focus", () => {
-      const b = bar.getBoundingClientRect();
-      showTip({ clientX: b.right, clientY: b.top }, cand, r);
+    st.cells.forEach((c) => {
+      const line = el("div", "barline");
+      const bar = el("div", "bar");
+      bar.style.setProperty("--c", c.cand.color);
+      bar.style.width = `${(c.share / axisMax) * 100}%`;
+      line.append(bar);
+      if (i < 3) line.append(el("span", "val", fmtPct(c.share))); // label only the three largest rows
+      track.append(line);
     });
-    bar.addEventListener("blur", hideTip);
-    track.append(bar, el("span", "val", fmtPct(r.share)));
     row.append(track);
+    row.addEventListener("pointermove", (ev) => showTip(ev, st));
+    row.addEventListener("pointerleave", hideTip);
+    row.addEventListener("focus", () => { const b = row.getBoundingClientRect(); showTip({ clientX: b.left + b.width / 2, clientY: b.top }, st); });
+    row.addEventListener("blur", hideTip);
     rows.append(row);
-  }
+  });
   plot.append(grid, rows);
   panel.append(plot);
   return panel;
@@ -216,59 +218,52 @@ async function main() {
   if (!res.ok) throw new Error(`data/states.json: ${res.status}`);
   const data = await res.json();
 
-  const top2 = data.brazil.candidates.slice(0, 2);
-  const cands = top2.map((c, i) => {
-    const rows = Object.entries(data.states).map(([uf, s]) => {
-      const m = s.candidates.find((x) => x.number === c.number);
-      return { uf, votes: m ? m.votes : 0 };
-    });
-    const total = rows.reduce((a, r) => a + r.votes, 0);
-    rows.forEach((r) => (r.share = (r.votes / total) * 100));
-    rows.sort((a, b) => b.votes - a.votes);
-    rows.forEach((r, k) => (r.rank = k + 1));
-    const top = rows.slice(0, TOP_N);
-    return {
-      number: c.number, name: DISPLAY_NAMES[c.number] ?? titleCase(c.name), party: c.party,
-      color: `var(--series-${i + 1})`, total, rows, top, topSum: top.reduce((a, r) => a + r.share, 0),
-    };
+  const cands = data.brazil.candidates.slice(0, 2).map((c, i) => {
+    const name = DISPLAY_NAMES[c.number] ?? titleCase(c.name);
+    const votesByUf = Object.fromEntries(Object.entries(data.states).map(([uf, s]) => [uf, (s.candidates.find((x) => x.number === c.number) ?? { votes: 0 }).votes]));
+    const total = Object.values(votesByUf).reduce((a, v) => a + v, 0);
+    return { number: c.number, name, short: name.split(" ")[0], party: c.party, color: `var(--series-${i + 1})`, votesByUf, total };
   });
 
-  const axisMax = Math.ceil((Math.max(...cands.map((c) => c.top[0].share)) + 4) / 5) * 5 // headroom for the value label;
+  // One entry per state: a cell per candidate, ordered by the first candidate's contribution.
+  const states = Object.keys(data.states).map((uf) => ({
+    uf, leaderName: cands[0].name,
+    cells: cands.map((c) => ({ cand: c, votes: c.votesByUf[uf], share: (c.votesByUf[uf] / c.total) * 100 })),
+  })).sort((a, b) => b.cells[0].votes - a.cells[0].votes);
+  states.forEach((st, i) => (st.rank = i + 1));
+
+  const axisMax = Math.ceil((Math.max(...states.flatMap((s) => s.cells.map((c) => c.share))) + 4) / 5) * 5; // headroom for the value label
   const legend = document.getElementById("legend");
   cands.forEach((c) => {
-    const s = el("span");
+    const sp = el("span");
     const sw = el("i", "swatch"); sw.style.setProperty("--c", c.color);
-    s.append(sw, document.createTextNode(`${c.name} (${c.party})`));
-    legend.append(s);
+    sp.append(sw, document.createTextNode(`${c.name} (${c.party}) · ${fmtInt.format(c.total)} votos`));
+    legend.append(sp);
   });
 
-  const panels = document.getElementById("panels");
-  cands.forEach((c) => panels.append(renderPanel(c, axisMax)));
-
+  document.getElementById("panels").append(renderChart(cands, states, axisMax));
+  const top3 = states.slice(0, 3);
+  const sum3 = (ci) => top3.reduce((a, s) => a + s.cells[ci].share, 0);
   document.getElementById("sub").textContent =
-    `Presidente, 1º turno 2026 · participação de cada estado no total de votos do candidato (top ${TOP_N}) · mesma escala nos dois gráficos`;
+    `Presidente, 1º turno 2026 · ${top3.map((s) => s.uf).join(", ")} somam ${sum3(0).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% dos votos de ${cands[0].short} e ${sum3(1).toLocaleString("pt-BR", { maximumFractionDigits: 1 })}% dos de ${cands[1].short}`;
 
-  // Full table, sorted by the first candidate's share.
   const table = document.getElementById("table");
   const thead = el("thead"); const hr = el("tr");
   hr.append(el("th", null, "UF"));
-  cands.forEach((c) => { hr.append(el("th", null, `${c.name} (votos)`), el("th", null, "% do total")); });
+  cands.forEach((c) => hr.append(el("th", null, `${c.name} (votos)`), el("th", null, "% do total")));
   thead.append(hr);
   const tbody = el("tbody");
-  cands[0].rows.forEach((r0) => {
+  states.forEach((st) => {
     const tr = el("tr");
-    tr.append(el("td", null, UF_NAMES[r0.uf] ?? r0.uf));
-    cands.forEach((c) => {
-      const r = c.rows.find((x) => x.uf === r0.uf);
-      tr.append(el("td", null, fmtInt.format(r.votes)), el("td", null, fmtPct(r.share)));
-    });
+    tr.append(el("td", null, UF_NAMES[st.uf] ?? st.uf));
+    st.cells.forEach((c) => tr.append(el("td", null, fmtInt.format(c.votes)), el("td", null, fmtPct(c.share))));
     tbody.append(tr);
   });
   table.append(thead, tbody);
 
   document.getElementById("note").textContent =
     `Fonte: TSE (resultados.tse.jus.br), apuração de ${data.brazil.updatedAt} (${data.brazil.countedPct.toLocaleString("pt-BR")}% das seções). ` +
-    `Percentual = votos do candidato no estado ÷ votos do candidato no país; o exterior conta como unidade à parte.`;
+    `O exterior conta como unidade à parte. Passe o mouse (ou use Tab) sobre um estado para ver votos e saldo.`;
 }
 
 main().catch((e) => {
