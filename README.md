@@ -22,3 +22,14 @@ npx serve .                        # ou qualquer servidor estático
 2. Importe e adicione o gráfico na lista de `charts/registry.js`.
 
 A página mostra o gráfico numa nova seção e inclui um atalho para ele no topo.
+
+## Publicação e atualização
+
+O site é publicado pelo GitHub Pages direto da `main` (Settings → Pages → Deploy from a branch). Como o Pages deixa os navegadores
+guardarem arquivos por até 10 minutos, a página, ao abrir no endereço publicado, se redireciona uma vez para o mesmo endereço com
+`?_cb=<número único>`, o que ignora qualquer cópia em cache. O CSS, os scripts e os dados usam o mesmo número, então tudo vem na versão mais recente.
+
+O rodapé mostra `Versão do código: AAAA-MM-DD HH:MM` (tag `app-version` no `<head>` do `index.html`). Atualize essa data a cada mudança
+(horário da Alemanha, Europe/Berlin) para confirmar que a versão nova está no ar.
+
+Ao criar um arquivo de gráfico novo em `charts/`, acrescente-o também à lista `modules` no começo do `index.html` (sem isso ele continua funcionando, mas pode ficar em cache).
